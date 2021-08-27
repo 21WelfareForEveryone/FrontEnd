@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/fragment1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id = '@+id/layout_username'
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft = '10dp'>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text = "이름"
+            android:textColor="@color/black"
+            android:textSize="18sp">
+        </TextView>
+        <EditText
+            android:paddingLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint = "이름"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:background="@drawable/register_layout_et_design"
+            android:id = "@+id/et_username"
+            android:layout_gravity="center_vertical"
+            android:inputType="text">
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id = '@+id/layout_id'
+        app:layout_constraintTop_toBottomOf="@id/layout_username"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft = '10dp'>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text = "ID"
+            android:textColor="@color/black"
+            android:textSize="18sp">
+        </TextView>
+
+        <EditText
+            android:paddingLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint = "ID"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:background="@drawable/register_layout_et_design"
+            android:id = "@+id/et_id"
+            android:layout_gravity="center_vertical"
+            android:inputType="text">
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id = '@+id/layout_pwd'
+        app:layout_constraintTop_toBottomOf="@id/layout_id"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft = '10dp'>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text = "Password"
+            android:textColor="@color/black"
+            android:textSize="18sp">
+        </TextView>
+        <EditText
+            android:paddingLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint = "Password"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:background="@drawable/register_layout_et_design"
+            android:id = "@+id/et_pwd"
+            android:layout_gravity="center_vertical"
+            android:inputType="text">
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id = '@+id/layout_gender'
+        app:layout_constraintTop_toBottomOf="@id/layout_pwd"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft = '10dp'>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text = "Gender"
+            android:textColor="@color/black"
+            android:textSize="18sp">
+        </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:focusable="true"
+            >
+            <RadioGroup
+                android:focusable="true"
+                android:id="@+id/genderRadioGroup"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RadioButton
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id = "@+id/btn_male"
+                    android:text="Male">
+                </RadioButton>
+                <RadioButton
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id = "@+id/btn_female"
+                    android:text="Female">
+                </RadioButton>
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id = '@+id/layout_income'
+        app:layout_constraintTop_toBottomOf="@id/layout_gender"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft = '10dp'>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text = "Income"
+            android:textColor="@color/black"
+            android:textSize="18sp">
+        </TextView>
+        <Spinner
+            android:layout_marginTop = "10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id = "@+id/spinner_income"
+            android:layout_gravity="center_vertical">
+        </Spinner>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id = '@+id/layout_address'
+        app:layout_constraintTop_toBottomOf="@id/layout_income"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft = '10dp'>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text = "Address"
+            android:textColor="@color/black"
+            android:textSize="18sp">
+        </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Spinner
+                    android:layout_marginTop = "10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id = "@+id/spinner_address_city"
+                    android:layout_gravity="center_vertical">
+                </Spinner>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Spinner
+                    android:layout_marginTop = "10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id = "@+id/spinner_address_gu"
+                    android:layout_gravity="center_vertical">
+                </Spinner>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

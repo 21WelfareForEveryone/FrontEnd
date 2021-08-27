@@ -1,0 +1,158 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.tave0819"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+8-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:6:5-67
+11-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:6:22-64
+12
+13    <!-- Permission will be merged into the manifest of the hosting app. -->
+14    <!-- Is required to launch foreground extraction service for targetSdkVersion 28+. -->
+15    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+15-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:8:3-74
+15-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:8:20-72
+16
+17    <application
+17-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:8:5-33:19
+18        android:allowBackup="true"
+18-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:9:9-35
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.5.0] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/07adfc08fe16d3453ab9291511ec05fe/core-1.5.0/AndroidManifest.xml:24:18-86
+20        android:debuggable="true"
+21        android:extractNativeLibs="false"
+22        android:icon="@mipmap/ic_launcher"
+22-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:10:9-43
+23        android:label="@string/app_name"
+23-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:11:9-41
+24        android:roundIcon="@mipmap/ic_launcher_round"
+24-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:12:9-54
+25        android:supportsRtl="true"
+25-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:13:9-35
+26        android:testOnly="true"
+27        android:theme="@style/Theme.Tave0819"
+27-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:14:9-46
+28        android:usesCleartextTraffic="true" >
+28-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:15:9-44
+29        <activity
+29-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:16:9-19:25
+30            android:name="com.example.tave0819.RegisterActivity"
+30-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:17:13-45
+31            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+31-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:18:13-69
+32        <activity android:name="com.example.tave0819.MainActivity" >
+32-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:20:9-25:20
+32-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:20:19-47
+33            <intent-filter>
+33-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:21:13-24:29
+34                <action android:name="android.intent.action.MAIN" />
+34-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:22:17-69
+34-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:22:25-66
+35
+36                <category android:name="android.intent.category.LAUNCHER" />
+36-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:23:17-77
+36-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:23:27-74
+37            </intent-filter>
+38        </activity>
+39        <activity
+39-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:26:9-32:20
+40            android:name="com.example.tave0819.LoginActivity"
+40-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:27:13-42
+41            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+41-->/Users/zinzinbin/AndroidStudioProjects/tave0819/app/src/main/AndroidManifest.xml:29:13-69
+42        </activity>
+43
+44        <provider
+44-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:26:9-34:20
+45            android:name="androidx.startup.InitializationProvider"
+45-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:27:13-67
+46            android:authorities="com.example.tave0819.androidx-startup"
+46-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:28:13-68
+47            android:exported="false" >
+47-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:29:13-37
+48            <meta-data
+48-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:31:13-33:52
+49                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+49-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:32:17-85
+50                android:value="androidx.startup" />
+50-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:33:17-49
+51        </provider>
+52
+53        <receiver
+53-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:36:9-45:20
+54            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+54-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:37:13-76
+55            android:directBootAware="false"
+55-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:38:13-44
+56            android:enabled="true"
+56-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:39:13-35
+57            android:exported="true"
+57-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:40:13-36
+58            android:permission="android.permission.DUMP" >
+58-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:41:13-57
+59            <intent-filter>
+59-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:42:13-44:29
+60                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+60-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:43:17-91
+60-->[androidx.profileinstaller:profileinstaller:1.0.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/780bb6943c37756781303d60b212a228/profileinstaller-1.0.1/AndroidManifest.xml:43:25-88
+61            </intent-filter>
+62        </receiver> <!-- The activities will be merged into the manifest of the hosting app. -->
+63        <activity
+63-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:12:5-271
+64            android:name="com.google.android.play.core.missingsplits.PlayCoreMissingSplitsActivity"
+64-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:12:15-102
+65            android:enabled="false"
+65-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:12:103-126
+66            android:exported="false"
+66-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:12:127-151
+67            android:launchMode="singleInstance"
+67-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:12:204-239
+68            android:process=":playcore_missing_splits_activity"
+68-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:12:152-203
+69            android:stateNotNeeded="true" />
+69-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:12:240-269
+70        <activity
+70-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:13:5-226
+71            android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity"
+71-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:13:15-95
+72            android:enabled="false"
+72-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:13:96-119
+73            android:exported="false"
+73-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:13:120-144
+74            android:stateNotNeeded="true"
+74-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:13:145-174
+75            android:theme="@style/Theme.PlayCore.Transparent" /> <!-- The services will be merged into the manifest of the hosting app. -->
+75-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:13:175-224
+76        <service
+76-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:16:5-18:15
+77            android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService"
+77-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:16:14-95
+78            android:enabled="false"
+78-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:16:96-119
+79            android:exported="true" >
+79-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:16:120-143
+80            <meta-data
+80-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:17:7-108
+81                android:name="com.google.android.play.core.assetpacks.versionCode"
+81-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:17:18-84
+82                android:value="10901" />
+82-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:17:85-106
+83        </service>
+84        <service
+84-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:19:5-147
+85            android:name="com.google.android.play.core.assetpacks.ExtractionForegroundService"
+85-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:19:14-96
+86            android:enabled="false"
+86-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:19:97-120
+87            android:exported="false" />
+87-->[com.google.android.play:core:1.9.1] /Users/zinzinbin/.gradle/caches/transforms-2/files-2.1/ff0f6144e2281bba737c8b9b5e57380f/core-1.9.1/AndroidManifest.xml:19:121-145
+88    </application>
+89
+90</manifest>

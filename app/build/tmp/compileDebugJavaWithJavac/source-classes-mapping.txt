@@ -1,0 +1,49 @@
+com/example/tave0819/SharedPrefManager.java
+ com.example.tave0819.SharedPrefManager
+com/example/tave0819/URLs.java
+ com.example.tave0819.URLs
+com/example/tave0819/BuildConfig.java
+ com.example.tave0819.BuildConfig
+com/example/tave0819/User.java
+ com.example.tave0819.User
+com/example/tave0819/VolleySingleton.java
+ com.example.tave0819.VolleySingleton
+com/example/tave0819/Register1.java
+ com.example.tave0819.Register1
+ com.example.tave0819.Register1$1
+com/example/tave0819/ProfileFragment.java
+ com.example.tave0819.ProfileFragment
+com/example/tave0819/BlankFragment.java
+ com.example.tave0819.BlankFragment
+com/example/tave0819/ChatbotFragment.java
+ com.example.tave0819.ChatbotFragment
+com/example/tave0819/MapFragment.java
+ com.example.tave0819.MapFragment
+com/example/tave0819/HomeFragment.java
+ com.example.tave0819.HomeFragment
+com/example/tave0819/LoginActivity.java
+ com.example.tave0819.LoginActivity
+ com.example.tave0819.LoginActivity$1
+ com.example.tave0819.LoginActivity$2
+ com.example.tave0819.LoginActivity$3
+ com.example.tave0819.LoginActivity$4
+ com.example.tave0819.LoginActivity$5
+com/example/tave0819/RegisterActivity.java
+ com.example.tave0819.RegisterActivity
+ com.example.tave0819.RegisterActivity$1
+ com.example.tave0819.RegisterActivity$2
+ com.example.tave0819.RegisterActivity$3
+ com.example.tave0819.RegisterActivity$4
+ com.example.tave0819.RegisterActivity$5
+ com.example.tave0819.RegisterActivity$6
+ com.example.tave0819.RegisterActivity$7
+com/example/tave0819/MainActivity.java
+ com.example.tave0819.MainActivity
+com/example/tave0819/Login.java
+ com.example.tave0819.Login
+ com.example.tave0819.Login$1
+ com.example.tave0819.Login$2
+com/example/tave0819/Register2.java
+ com.example.tave0819.Register2
+ com.example.tave0819.Register2$1
+ com.example.tave0819.Register2$2

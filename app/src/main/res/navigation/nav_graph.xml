@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/login">
+    <fragment
+        android:id="@+id/register1"
+        android:name="com.example.tave0819.Register1"
+        android:label="fragment_register1"
+        tools:layout="@layout/fragment_register1" >
+        <action
+            android:id="@+id/action_register1_to_register2"
+            app:destination="@id/register2" />
+    </fragment>
+    <fragment
+        android:id="@+id/register2"
+        android:name="com.example.tave0819.Register2"
+        android:label="fragment_register2"
+        tools:layout="@layout/fragment_register2" >
+        <action
+            android:id="@+id/action_register2_to_login"
+            app:destination="@id/login" />
+        <action
+            android:id="@+id/action_register2_to_register1"
+            app:destination="@id/register1" />
+    </fragment>
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.tave0819.Login"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login_to_register1"
+            app:destination="@id/register1" />
+        <action
+            android:id="@+id/action_login_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.tave0819.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_chatbotFragment"
+            app:destination="@id/chatbotFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatbotFragment"
+        android:name="com.example.tave0819.ChatbotFragment"
+        android:label="fragment_chatbot"
+        tools:layout="@layout/fragment_chatbot" >
+        <action
+            android:id="@+id/action_chatbotFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_chatbotFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_chatbotFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.tave0819.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_mapFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_mapFragment_to_chatbotFragment"
+            app:destination="@id/chatbotFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.tave0819.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_chatbotFragment"
+            app:destination="@id/chatbotFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+</navigation>
