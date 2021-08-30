@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#B7B7B7"
+    tools:context=".InfoDetail">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar_info_detail" />
+
+    <LinearLayout
+        android:background="@drawable/background"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:id = "@+id/tv_info_title"
+            android:text = "주거안정 월세대출"
+            android:textSize = "20dp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id = "@+id/layout_info_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/design">
+
+        <TextView
+            android:id = "@+id/layout_info_profile_header"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:text = "복지개요"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor = "@color/black"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id = "@+id/tv_target"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_info_profile_header"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:text = "대상"
+            android:textStyle="normal"
+            android:textSize="18dp"
+            android:textColor = "@color/black"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id = "@+id/tv_target_value"
+            app:layout_constraintLeft_toRightOf="@+id/tv_target"
+            app:layout_constraintTop_toBottomOf="@+id/layout_info_profile_header"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:text = "장애인"
+            android:textStyle="normal"
+            android:textSize="18dp"
+            android:textColor = "#696969"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id = "@+id/tv_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_target"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:text = "내용"
+            android:textStyle="normal"
+            android:textSize="18dp"
+            android:textColor = "@color/black"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id = "@+id/tv_content_value"
+            app:layout_constraintLeft_toRightOf="@+id/tv_content"
+            app:layout_constraintTop_toBottomOf="@+id/tv_target_value"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:text = "월세대출을 1000만원까지 지원"
+            android:textStyle="normal"
+            android:textSize="18dp"
+            android:textColor = "#696969"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id = "@+id/tv_call"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_width="wrap_content"
+            android:text = "문의처"
+            android:textStyle="normal"
+            android:textSize="18dp"
+            android:textColor = "@color/black"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id = "@+id/tv_call_value"
+            app:layout_constraintLeft_toRightOf="@+id/tv_call"
+            app:layout_constraintTop_toBottomOf="@+id/tv_content_value"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:text = "129"
+            android:textStyle="normal"
+            android:textSize="18dp"
+            android:textColor = "#696969"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id = "@+id/layout_info_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/design">
+        <TextView
+            android:id = "@+id/layout_info_detail_header"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:text = "복지 상세내용"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor = "@color/black"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id = "@+id/detail_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_info_detail_header"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:text = "지역사회를 기반으로 ......"
+            android:textStyle="normal"
+            android:textSize="18dp"
+            android:textColor = "#696969"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id = "@+id/layout_url_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/design">
+
+        <TextView
+            android:id = "@+id/layout_url_info_header"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:text = "URL 접속"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor = "@color/black"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id = "@+id/tv_url"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_url_info_header"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:text = "https://www.naver.com"
+            android:textStyle="normal"
+            android:textSize="18dp"
+            android:textColor = "#696969"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -39,11 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //ActionBar actionBar = getSupportActionBar();
-        //actionBar.hide();
-
-        // login: volley to send email and password to php server
-        // login complete
         if(SharedPrefManager.getInstance(this).isLoggedIn()){
             finish();
             startActivity(new Intent(this, MainActivity.class));
@@ -52,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
        // else
         et_id = findViewById(R.id.et_Id);
         et_pwd = findViewById(R.id.et_pwd);
-
         btn_login = (Button)findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override

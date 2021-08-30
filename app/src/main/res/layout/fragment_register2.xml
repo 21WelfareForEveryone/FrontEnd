@@ -12,7 +12,7 @@
     <LinearLayout
         android:id = '@+id/layout_life_cycle'
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -21,16 +21,16 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginBottom="5dp"
             android:text = "생애주기"
             android:textColor="@color/black"
             android:textSize="18sp">
         </TextView>
         <Spinner
-            android:layout_marginTop = "10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id = "@+id/spinner_life_cycle"
@@ -51,7 +51,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:text = "다문화가정 여부"
@@ -61,6 +62,8 @@
 
         <RadioGroup
             android:focusable="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:id="@+id/isMultiCultureRadioGroup"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -98,7 +101,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:text = "가구상황(한부모여부)"
@@ -110,6 +114,8 @@
             android:focusable="true"
             android:id="@+id/familyStateRadioGroup"
             android:orientation="horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <RadioButton
@@ -145,7 +151,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:text = "장애여부"
@@ -159,6 +166,8 @@
             android:focusable="true"
             >
             <RadioGroup
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:focusable="true"
                 android:id="@+id/isDisabledRadioGroup"
                 android:orientation="horizontal"
@@ -198,7 +207,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:text = "관심주제"
@@ -215,6 +225,8 @@
                 android:focusable="true"
                 android:id="@+id/interestRadioGroup"
                 android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <RadioButton
@@ -244,7 +256,7 @@
         android:text = "이전"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:background="@color/teal_200"
+        android:background="@drawable/btn_design"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="40dp"
         android:layout_marginLeft = "30dp"
@@ -257,7 +269,7 @@
         android:text="회원가입"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:background="@color/teal_200"
+        android:background="@drawable/btn_design"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="30dp"
         android:layout_marginTop="40dp"

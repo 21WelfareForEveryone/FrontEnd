@@ -51,6 +51,9 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_infoDetail"
+            app:destination="@id/infoDetail" />
     </fragment>
     <fragment
         android:id="@+id/chatbotFragment"
@@ -93,5 +96,14 @@
         <action
             android:id="@+id/action_profileFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoDetail"
+        android:name="com.example.tave0819.InfoDetail"
+        android:label="fragment_info_detail"
+        tools:layout="@layout/fragment_info_detail" >
+        <action
+            android:id="@+id/action_infoDetail_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

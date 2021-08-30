@@ -25,7 +25,6 @@ public class VolleySingleton {
         if(mInstance == null){
             mInstance = new VolleySingleton(context);
         }
-
         return mInstance;
     }
 

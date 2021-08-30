@@ -9,15 +9,4 @@ public class URLs {
     public static final String url_update = root_url + "/rest/user/update";
     public static final String url_delete = root_url + "/rest/user/delete";
     public static final String url_read = root_url + "/rest/welfare/read" ;
-
-
-    // test 목적 url
-    //private static final String root_url = "http://taveproject.dothome.co.kr";
-    //public static final String url_register = root_url + "/Register.php";
-    //public static final String url_login = root_url + "/Login.php";
-
-    //public static final String url_register = root_url;
-    //public static final String url_login = root_url;
-    //public static final String url_update = root_url;
-    //public static final String url_delete = root_url;
 }

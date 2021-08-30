@@ -30,7 +30,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterActivity extends FragmentActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     EditText et_username;
     EditText et_id;
@@ -60,9 +60,13 @@ public class RegisterActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        //hide actionbar
-        //ActionBar actionBar = getSupportActionBar();
-        //actionBar.hide();
+        Register1 register1 = new Register1();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_register1, register1).commit();
+
+        Register2 register2 = new Register2();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_register2, register2).commit();
+
+
 
         // if already loggedin then pass the register process
         if(SharedPrefManager.getInstance(this).isLoggedIn()){

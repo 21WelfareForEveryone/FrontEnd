@@ -1,14 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".MapFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar_main" />
 
-</FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/background"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintTop_toBottomOf="@+id/include">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/design"
+            android:orientation="vertical">
+            <TextView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text = "내 주변 복지시설"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:id = "@+id/txt_header"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+            <!-- google map api layout -->
+            <LinearLayout
+                app:layout_constraintTop_toBottomOf="@id/txt_header"
+                android:layout_width="match_parent"
+                android:id = "@+id/layout_map"
+                android:layout_height="300dp">
+                <fragment
+                    android:id = "@+id/Map"
+                    class = "com.google.android.gms.maps.MapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/layout_map"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text = "주변 복지시설 정보"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:id = "@+id/txt_sub_header"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+            <Button
+                android:id = "@+id/btn_map_1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/map_icon_obstacle"
+                android:text = "복지회관"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:background = "@drawable/map_btn_design"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/layout_map"
+                android:layout_marginTop="50dp"/>
+
+            <Button
+                android:id = "@+id/btn_map_2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/map_icon_local_hospital"
+                android:text = "보건소"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:background = "@drawable/map_btn_design"
+                app:layout_constraintLeft_toRightOf="@id/btn_map_1"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/layout_map"
+                android:layout_marginTop="50dp"/>
+
+            <Button
+                android:id = "@+id/btn_map_3"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/map_icon_obstacle"
+                android:text = "경로당"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:background = "@drawable/map_btn_design"
+                app:layout_constraintLeft_toRightOf="@id/btn_map_2"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/layout_map"
+                android:layout_marginTop="50dp"/>
+
+            <Button
+                android:id = "@+id/btn_map_4"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/map_icon_office"
+                android:text = "동사무소"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:background = "@drawable/map_btn_design"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toBottomOf="@id/btn_map_1"
+                android:layout_marginTop="20dp"/>
+            <Button
+                android:id = "@+id/btn_map_5"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/map_icon_police"
+                android:text = "파출소"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:background = "@drawable/map_btn_design"
+                app:layout_constraintLeft_toRightOf="@+id/btn_map_4"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toBottomOf="@id/btn_map_2"
+                android:layout_marginTop="20dp"/>
+
+            <Button
+                android:id = "@+id/btn_map_6"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/map_icon_hospital"
+                android:text = "병원"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:background = "@drawable/map_btn_design"
+                app:layout_constraintLeft_toRightOf="@+id/btn_map_5"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toBottomOf="@id/btn_map_3"
+                android:layout_marginTop="20dp"/>
+
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:itemIconTint="@drawable/menu_selector_color"
+        app:itemTextColor="@drawable/menu_selector_color"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_nav" />
+</LinearLayout>
