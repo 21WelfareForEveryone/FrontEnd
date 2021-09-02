@@ -1,12 +1,19 @@
 package com.example.tave0819;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +65,35 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+
+        // navigation action
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)view.findViewById(R.id.nav_view);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_1);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch(item.getItemId()){
+                    case R.id.navigation_1:
+                        return true;
+                    case R.id.navigation_2:
+                        navController.navigate(R.id.action_homeFragment_to_chatbotFragment);
+                        return true;
+                    case R.id.navigation_3:
+                        navController.navigate(R.id.action_homeFragment_to_mapFragment);
+                        return true;
+                    case R.id.navigation_4:
+                        navController.navigate(R.id.action_homeFragment_to_profileFragment);
+                        return true;
+                }
+                return false;
+            }
+        });
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return view;
     }
 }

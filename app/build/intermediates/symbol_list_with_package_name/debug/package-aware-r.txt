@@ -1957,7 +1957,6 @@ id META
 id Map
 id NO_DEBUG
 id Register1
-id Register2
 id SHIFT
 id SHOW_ALL
 id SHOW_PATH
@@ -2383,6 +2382,13 @@ id progress_icon
 id progress_title
 id radio
 id ratio
+id rb_interest0
+id rb_interest1
+id rb_interest2
+id rb_interest3
+id rb_interest4
+id rb_interest5
+id rb_interest6
 id rectangles
 id register1
 id register2

@@ -9,13 +9,17 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,11 +56,19 @@ public class Register1 extends Fragment {
     String[] local_items = {"강북구","강서구", "강동구", "강남구", "마포구", "영등포구", "관악구", "종로구", "노원구"};
     String City;
     String Local;
+    String Address;
 
     // boolean type variables
     RadioGroup RG_gender;
     RadioButton rb_male;
     RadioButton rb_female;
+    int Gender;
+
+    // spinner type variables
+    Spinner spinner_income;
+
+    Spinner spinner_address_city;
+    Spinner spinner_address_gu;
 
     private View view;
 
@@ -103,13 +115,106 @@ public class Register1 extends Fragment {
 
         view =  inflater.inflate(R.layout.fragment_register1, container, false);
 
+        // manage user variable
+        et_username = (EditText) view.findViewById(R.id.et_username);
+        et_id = (EditText)view.findViewById(R.id.et_id);
+        et_pwd = (EditText)view.findViewById(R.id.et_pwd);
+
+        // gender
+        rb_male =  (RadioButton)view.findViewById(R.id.btn_male);
+        rb_female = (RadioButton)view.findViewById(R.id.btn_female);
+        RG_gender = (RadioGroup)view.findViewById(R.id.genderRadioGroup);
+
+        // spinner(소득분위)
+        spinner_income = (Spinner)view.findViewById(R.id.spinner_income);
+
+        // spinner(주소)
+        spinner_address_city = (Spinner)view.findViewById(R.id.spinner_address_city);
+        spinner_address_gu = (Spinner)view.findViewById(R.id.spinner_address_gu);
+
+
+        // income preprocessing
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, income_items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner_income.setAdapter(adapter);
+        spinner_income.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Income = position;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Income = -1;
+            }
+        });
+
+        // address preprocessing
+        ArrayAdapter<String> adapter_address_city = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, city_items);
+        adapter_address_city.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner_address_city.setAdapter(adapter_address_city);
+        spinner_address_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                City = city_items[position];
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                City = (String) city_items[0];
+            }
+        });
+
+        ArrayAdapter<String> adapter_address_gu = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, local_items);
+        adapter_address_gu.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner_address_gu.setAdapter(adapter_address_gu);
+        spinner_address_gu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Local = (String) local_items[position];
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Local = local_items[0];
+            }
+        });
+
         Button btn_next = (Button) view.findViewById(R.id.btn_next);
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                // gender preprocessing
+                if(RG_gender.getCheckedRadioButtonId() == rb_male.getId()){
+                    Log.v("rb_male is selected? : ", "true");
+                    Gender = 1;
+                }
+                else if(RG_gender.getCheckedRadioButtonId() == rb_female.getId()) {
+                    Log.v("rb_female is selected? : ", "true");
+                    Gender = 0;
+                }
+                
+                Income = spinner_income.getSelectedItemPosition();
+
+                // address
+                City = spinner_address_city.getSelectedItem().toString();
+                Local = spinner_address_gu.getSelectedItem().toString();
+                Address = City +"-"+ Local;
+
+                Log.v("id input for register: ", "id input complete"+ et_id.getText().toString());
+                Log.v("pwd input for register: ", "pwd input complete" + et_pwd.getText().toString());
+                Log.v("name input for register: ", "name input complete" + et_username.getText().toString());
+                Log.v("gender input for register: ", "gender input complete" + Gender);
+                Log.v("income input for register: ", "income input complete" + Income);
+                Log.v("address input for register: ", "address input complete" + Address);
+
+
                 Bundle bundle = new Bundle();
-                bundle.putString("fragment_register2", "test");
+                bundle.putString("user_id", et_id.getText().toString().trim());
+                bundle.putString("user_password", et_pwd.getText().toString());
+                bundle.putString("user_name", et_username.getText().toString());
+                bundle.putInt("user_gender", Gender);
+                bundle.putInt("user_income", Income);
+                bundle.putString("user_address", Address);
+
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 Register2 register2 = new Register2();
                 register2.setArguments(bundle);

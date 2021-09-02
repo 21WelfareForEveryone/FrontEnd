@@ -2,26 +2,25 @@ package com.example.tave0819;
 
 public class User{
     private String id, pwd, username, address, mToken;
-    private int age, lifeCycle, income;
-    private boolean gender, isMultiCultural, familyState, isDisabled, isVeterans;
+    private int lifeCycle, income, interest;
+    private int  gender, isMultiCultural, familyState, isDisabled;
     private String pushToken;
 
-    public User(String username, String id, String pwd, String address, String mToken, int age, int lifeCycle, int income,
-                boolean gender, boolean isMultiCultural, boolean familyState, boolean isDisabled, boolean isVeterans, String pushToken){
+    public User(String username, String id, String pwd, String address, String mToken, int lifeCycle, int income, int interest,
+                int gender, int isMultiCultural, int familyState, int isDisabled, String pushToken){
         this.username = username;
         this.id = id;
         this.pwd = pwd;
         this.address = address;
         this.mToken = mToken;
-        this.age = age;
         this.lifeCycle = lifeCycle;
         this.income = income;
         this.gender = gender; // int 0,1
         this.isMultiCultural = isMultiCultural;
         this.isDisabled = isDisabled;
         this.familyState = familyState;
-        this.isVeterans = isVeterans;
         this.pushToken = pushToken;
+        this.interest = interest;
     }
 
     public String getUsername() {
@@ -48,12 +47,10 @@ public class User{
         this.pwd = pwd;
     }
 
-    public boolean  getGender(){return gender;}
-    public void setGender(boolean gender){this.gender = gender;}
+    public int  getGender(){return gender;}
+    public void setGender(int gender){this.gender = gender;}
     public String getmToken(){return mToken;}
     public void setmToken(String mToken){this.mToken = mToken;}
-    public int  getAge(){return age;}
-    public void setAge(int age){this.age = age;}
     public int getLifeCycle(){return lifeCycle;}
     public void setLifeCycle(int lifeCycle){this.lifeCycle = lifeCycle;}
     public String getAddress(){return address;}
@@ -61,18 +58,18 @@ public class User{
     public int getIncome(){return income;}
     public void setIncome(int income){this.income = income;}
 
-    public boolean getIsMultiCultural(){return isMultiCultural;}
-    public void setIsMultiCultural(boolean isMultiCultural){this.isMultiCultural = isMultiCultural;}
-    public boolean getIsDisabled(){return isDisabled;}
-    public void  setIsDisabled(boolean isDisabled){this.isDisabled = isDisabled;}
+    public int  getIsMultiCultural(){return isMultiCultural;}
+    public void setIsMultiCultural(int isMultiCultural){this.isMultiCultural = isMultiCultural;}
+    public int getIsDisabled(){return isDisabled;}
+    public void  setIsDisabled(int isDisabled){this.isDisabled = isDisabled;}
 
-    public boolean getFamilyState(){return familyState;}
-    public void setFamilyState(boolean familyState){this.familyState = familyState;}
-
-    public boolean getIsVeterans(){return isVeterans;}
-    public void setIsVeterans(boolean isVeterans){this.isVeterans = isVeterans;}
+    public int getFamilyState(){return familyState;}
+    public void setFamilyState(int familyState){this.familyState = familyState;}
 
     public String getPushToken(){return pushToken;}
     public void setPushToken(String pushToken){this.pushToken = pushToken;}
+
+    public int getInterest(){return interest;}
+    public void setInterest(int interest){this.interest = interest;}
 
 }
