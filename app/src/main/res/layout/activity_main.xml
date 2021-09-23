@@ -4,14 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="#24bfad"
+    tools:context="com.example.tave0915.MainActivity">
+
+    <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src = "@drawable/img_main_logo"/>
+
+    <TextView
+        android:id = "@+id/main_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:fontFamily="@font/font"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="9sp"
+        tools:text="당신을 위한 맞춤 복지"/>
+
+    <TextView
+        android:id = "@+id/sub_title"
+        app:layout_constraintTop_toBottomOf="@id/main_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font"
+        android:textStyle="normal"
+        android:textSize="12sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="5sp"
+        tools:text="총 10개의 복지가 있습니다"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/sub_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id = "@+id/list_container"
+        android:background="@drawable/recommend_list_container"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="302dp">
+    </LinearLayout>
+
+    <TextView
+        android:id = "@+id/main_title_category"
+        app:layout_constraintTop_toBottomOf="@id/list_container"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="9sp"
+        tools:text="복지 카테고리"/>
+
+    <TextView
+        android:id = "@+id/sub_title_category"
+        app:layout_constraintTop_toBottomOf="@id/main_title_category"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font"
+        android:textStyle="normal"
+        android:textSize="12sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="5sp"
+        tools:text="총 10개의 카테고리가 있습니다"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:background="#2e8378"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav" />
 </androidx.constraintlayout.widget.ConstraintLayout>
