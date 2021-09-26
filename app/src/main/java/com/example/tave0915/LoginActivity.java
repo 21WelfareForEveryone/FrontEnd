@@ -55,8 +55,8 @@ public class LoginActivity extends AppCompatActivity {
 //                String mToken = loginInfoOnClick.getToken();
 //                Log.v("userLoginInfo loginSuccess", loginSuccess.toString());
 //                Log.v("userLoginInfo mToken", mToken);
-
-                userLogin();
+                isSuccess = true;
+                //userLogin();
                 if(isSuccess){
                     Log.v("Login success?", isSuccess.toString());
                     // 해당 값들을 저장할 수 있는 함수 구현(json형태로 다른 파트로 이동)
@@ -166,6 +166,7 @@ public class LoginActivity extends AppCompatActivity {
                 return params;
             }
         };
+
 //        userLoginInfo.setIsSuccess(isSuccess);
 //        userLoginInfo.setToken(mToken);
 //        userLoginInfo.setStatusCode(statusCode);

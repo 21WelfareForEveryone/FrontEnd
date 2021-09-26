@@ -5,7 +5,6 @@
         android:id="@+id/navigation_1"
         android:icon="@drawable/menu_home"
         android:title="Home"
-        android:checked="true"
         android:enabled="true"
         />
     <item

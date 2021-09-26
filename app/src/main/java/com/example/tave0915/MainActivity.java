@@ -30,18 +30,20 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navigation_1:
                         return true;
                     case R.id.navigation_2:
-//                        Intent intent2 = new Intent(MainActivity.this, ChatActivity.class);
-//                        startActivity(intent2);
+                        Intent intent2 = new Intent(MainActivity.this, ChatActivity.class);
+                        startActivity(intent2);
+                        finish();
                         return true;
                     case R.id.navigation_3:
-//                        Intent intent3 = new Intent(MainActivity.this, MapActivity.class);
-//                        startActivity(intent3);
-                        //finish();
+                        Intent intent3 = new Intent(MainActivity.this, MapActivity.class);
+                        startActivity(intent3);
+                        finish();
                         return true;
                     case R.id.navigation_4:
                         Intent intent4 = new Intent(MainActivity.this, MyProfileActivity.class);
                         intent4.putExtras(bundle);
                         startActivity(intent4);
+                        finish();
                         return true;
                 }
                 return false;

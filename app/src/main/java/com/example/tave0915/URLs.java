@@ -9,4 +9,5 @@ public class URLs {
     public static final String url_update = root_url + "/rest/user/update";
     public static final String url_delete = root_url + "/rest/user/delete";
     public static final String url_read = root_url + "/rest/user/read" ;
+    public static final String url_chatbot = root_url + "/chatbot/getresponse";
 }

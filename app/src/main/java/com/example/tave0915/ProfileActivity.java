@@ -92,6 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
     String mCurrentPhotoPath;
     Uri photoURI, albumURI = null;
     Boolean album;
+
     String mToken = "";
 
     // edit user info
@@ -107,11 +108,10 @@ public class ProfileActivity extends AppCompatActivity {
         // mToken and pushToken store
         Bundle bundle = (Bundle) getIntent().getExtras();
         JSONObject mTokenJson = new JSONObject();
-        if(bundle!=null){
-            mToken = bundle.getString("mToken");
-            Log.v("mToken from bundle :",mToken);
 
+        if(bundle!=null){
             try{
+                mToken = bundle.getString("mToken");
                 mTokenJson.put("mToken", mToken);
             }
             catch(JSONException e){
@@ -119,8 +119,8 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
         else{
-            Log.v("Bundle can not loaded to ProfileActivity :", "failed");
-        };
+            Log.v("Bundle can not loaded from MyProfileActivity", "failed");
+        }
 
         try{
             mTokenJson.put("mToken", mToken);
@@ -139,20 +139,20 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
             }
         });
 
         // photo uploaded
-        img_view = (ImageView)findViewById(R.id.img_view);
-        img_view.setOnTouchListener(new View.OnTouchListener(){
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                return false;
-            }
-        });
+//        img_view = (ImageView)findViewById(R.id.img_view);
+//        img_view.setOnTouchListener(new View.OnTouchListener(){
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                return false;
+//            }
+//        });
 
         // transfer user data to EditText data
         Button btn_edit = (Button)findViewById(R.id.btn_edit);
@@ -242,10 +242,12 @@ public class ProfileActivity extends AppCompatActivity {
 
                 int user_interest = interest;
 
-                editUserInfo(user_name, user_id, user_password, user_gender,
-                        user_income, user_address, user_life_cycle, user_is_multicultural,
-                        user_is_one_parent, user_is_disabled, user_interest);
+//                editUserInfo(user_name, user_id, user_password, user_gender,
+//                        user_income, user_address, user_life_cycle, user_is_multicultural,
+//                        user_is_one_parent, user_is_disabled, user_interest);
+
                 Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
             }
@@ -336,7 +338,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         // validate data
-
         String user_mToken = "";
 
         // log list for variable request check
@@ -404,22 +405,22 @@ public class ProfileActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "개인 정보수정에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
     };
 
-    private void takeAlbumAction(){
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-        startActivityForResult(intent, REQUEST_TAKE_PHOTO);
-    };
-
-    private void cropImage(){
-        Intent cropIntent = new Intent("com.android.camera.action.CROP");
-        cropIntent.setDataAndType(photoURI, "image/*");
-        cropIntent.putExtra("scale", true);
-        if(!album){
-            cropIntent.putExtra("output", photoURI);
-        }
-        else if(album){
-            cropIntent.putExtra("output", albumURI);
-        }
-        startActivityForResult(cropIntent, REQUEST_IMAGE_CROP);
-    }
+//    private void takeAlbumAction(){
+//        Intent intent = new Intent(Intent.ACTION_PICK);
+//        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+//        startActivityForResult(intent, REQUEST_TAKE_PHOTO);
+//    };
+//
+//    private void cropImage(){
+//        Intent cropIntent = new Intent("com.android.camera.action.CROP");
+//        cropIntent.setDataAndType(photoURI, "image/*");
+//        cropIntent.putExtra("scale", true);
+//        if(!album){
+//            cropIntent.putExtra("output", photoURI);
+//        }
+//        else if(album){
+//            cropIntent.putExtra("output", albumURI);
+//        }
+//        startActivityForResult(cropIntent, REQUEST_IMAGE_CROP);
+//    }
 }

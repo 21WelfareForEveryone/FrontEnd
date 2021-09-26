@@ -36,7 +36,7 @@ public class MyProfileActivity extends AppCompatActivity {
         });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
-        bottomNavigationView.setSelectedItemId(R.id.navigation_1);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_4);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -45,15 +45,17 @@ public class MyProfileActivity extends AppCompatActivity {
                     case R.id.navigation_1:
                         Intent intent1 = new Intent(MyProfileActivity.this, MainActivity.class);
                         startActivity(intent1);
+                        finish();
                         return true;
                     case R.id.navigation_2:
-//                        Intent intent2 = new Intent(MainActivity.this, ChatActivity.class);
-//                        startActivity(intent2);
+                        Intent intent2 = new Intent(MyProfileActivity.this, ChatActivity.class);
+                        startActivity(intent2);
+                        finish();
                         return true;
                     case R.id.navigation_3:
-//                        Intent intent3 = new Intent(MainActivity.this, MapActivity.class);
-//                        startActivity(intent3);
-                        //finish();
+                        Intent intent3 = new Intent(MyProfileActivity.this, MapActivity.class);
+                        startActivity(intent3);
+                        finish();
                         return true;
                     case R.id.navigation_4:
                         return true;

@@ -23,13 +23,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tave0915"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetailActivity"></activity>
-        <activity android:name=".ListActivity" />
-        <activity android:name=".MapActivity" />
-        <activity android:name=".IntroActivity">
+        <activity
+            android:name=".ChatActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
+        <activity
+            android:name=".DetailActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
+        <activity
+            android:name=".ListActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
+        <activity
+            android:name=".MapActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
+        <activity
+            android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

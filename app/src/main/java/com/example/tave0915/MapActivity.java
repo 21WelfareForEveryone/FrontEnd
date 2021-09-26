@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,6 +16,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -28,6 +31,36 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         fragmentManager = getFragmentManager();
         mapFragment = (MapFragment)fragmentManager.findFragmentById(R.id.googleMap);
         mapFragment.getMapAsync(this);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_3);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch(item.getItemId()){
+                    case R.id.navigation_1:
+                        Intent intent = new Intent(MapActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        return true;
+                    case R.id.navigation_2:
+                        Intent intent2 = new Intent(MapActivity.this, ChatActivity.class);
+                        startActivity(intent2);
+                        finish();
+                        return true;
+                    case R.id.navigation_3:
+                        return true;
+                    case R.id.navigation_4:
+                        Intent intent4 = new Intent(MapActivity.this, MyProfileActivity.class);
+                        startActivity(intent4);
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
+
     }
 
     @Override

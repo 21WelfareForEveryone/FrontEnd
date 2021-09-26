@@ -9,6 +9,7 @@
     tools:context=".ListActivity">
 
     <include layout = "@layout/toolbar_main_info"/>
+
     <LinearLayout
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
