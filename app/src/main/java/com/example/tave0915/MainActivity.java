@@ -31,11 +31,13 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.navigation_2:
                         Intent intent2 = new Intent(MainActivity.this, ChatActivity.class);
+                        intent2.putExtras(bundle);
                         startActivity(intent2);
                         finish();
                         return true;
                     case R.id.navigation_3:
                         Intent intent3 = new Intent(MainActivity.this, MapActivity.class);
+                        intent3.putExtras(bundle);
                         startActivity(intent3);
                         finish();
                         return true;

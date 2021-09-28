@@ -45,6 +45,8 @@ public class ChatRVAdapter extends RecyclerView.Adapter{
             case "bot":
                 ((BotViewHolder)holder).botMsgTV.setText(chatModel.getMessage());
                 break;
+            case "bot-welfare-info":  // bot_msg_toolbox2을 위해 추가...
+                break;
         }
     }
 
@@ -55,6 +57,8 @@ public class ChatRVAdapter extends RecyclerView.Adapter{
                 return 0;
             case "bot":
                 return 1;
+            case "bot-welfare-info": // bot_msg_toolbox2을 위해 추가..
+                return 2;
             default:
                 return -1;
         }
@@ -83,4 +87,26 @@ public class ChatRVAdapter extends RecyclerView.Adapter{
             botMsgTV = itemView.findViewById(R.id.idTVBot);
         }
     }
+
+    //chatbot dialog2 : detail info
+    public static class BotViewHolder2 extends RecyclerView.ViewHolder{
+        TextView botMsgTV_title1;
+        TextView botMsgTV_summary1;
+        TextView botMsgTV_title2;
+        TextView botMsgTV_summary2;
+        TextView botMsgTV_title3;
+        TextView botMsgTV_summary3;
+
+        public BotViewHolder2(@NonNull View itemView){
+            super(itemView);
+            botMsgTV_title1 = itemView.findViewById(R.id.idTVBot_title1);
+            botMsgTV_title2 = itemView.findViewById(R.id.idTVBot_title2);
+            botMsgTV_title3 = itemView.findViewById(R.id.idTVBot_title3);
+            botMsgTV_summary1 = itemView.findViewById(R.id.idTVBot_summary1);
+            botMsgTV_summary2 = itemView.findViewById(R.id.idTVBot_summary2);
+            botMsgTV_summary3 = itemView.findViewById(R.id.idTVBot_summary3);
+        }
+    }
+
+
 }

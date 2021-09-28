@@ -3,12 +3,15 @@ package com.example.tave0915;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -93,44 +96,120 @@ public class ProfileActivity extends AppCompatActivity {
     Uri photoURI, albumURI = null;
     Boolean album;
 
-    String mToken = "";
-
-    // edit user info
-    Boolean isSuccess;
-    int statusCode;
-    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        // mToken and pushToken store
         Bundle bundle = (Bundle) getIntent().getExtras();
-        JSONObject mTokenJson = new JSONObject();
+        String token = bundle.getString("token");
+        Log.v("token from bundle in profileActivity", token);
 
-        if(bundle!=null){
-            try{
-                mToken = bundle.getString("mToken");
-                mTokenJson.put("mToken", mToken);
+        // username, id, password
+        et_username = (EditText)findViewById(R.id.et_username);
+        et_id = (EditText)findViewById(R.id.et_id);
+        et_pwd = (EditText)findViewById(R.id.et_pwd);
+
+        // gender
+        rb_male =  (RadioButton)findViewById(R.id.btn_male);
+        rb_female = (RadioButton)findViewById(R.id.btn_female);
+        RG_gender = (RadioGroup)findViewById(R.id.genderRadioGroup);
+
+        // spinner(소득분위)
+        spinner_income = (Spinner)findViewById(R.id.spinner_income);
+
+        // spinner(주소)
+        spinner_address_city = (Spinner)findViewById(R.id.spinner_address_city);
+        spinner_address_gu = (Spinner)findViewById(R.id.spinner_address_gu);
+
+        // income preprocessing
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, income_items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner_income.setAdapter(adapter);
+        spinner_income.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Income = position;
             }
-            catch(JSONException e){
-                Log.v("JSONException from bundle to json object", e.getMessage());
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Income = -1;
             }
-        }
-        else{
-            Log.v("Bundle can not loaded from MyProfileActivity", "failed");
-        }
+        });
+
+        // address preprocessing
+        ArrayAdapter<String> adapter_address_city = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, city_items);
+        adapter_address_city.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner_address_city.setAdapter(adapter_address_city);
+        spinner_address_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                City = city_items[position];
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                City = city_items[0];
+            }
+        });
+
+        ArrayAdapter<String> adapter_address_gu = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, local_items);
+        adapter_address_gu.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner_address_gu.setAdapter(adapter_address_gu);
+        spinner_address_gu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Local = (String) local_items[position];
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Local = local_items[0];
+            }
+        });
+
+        RG_is_multicultural = (RadioGroup)findViewById(R.id.isMultiCultureRadioGroup);
+        rb_is_multicultural_true = (RadioButton)findViewById(R.id.btn_isMultiCulture_true);
+        rb_is_multicultural_false = (RadioButton)findViewById(R.id.btn_isMultiCulture_false);
+
+        RG_is_disabled = (RadioGroup)findViewById(R.id.isDisabledRadioGroup);
+        rb_is_disabled_true = (RadioButton)findViewById(R.id.btn_isDisabled_true);
+        rb_is_disabled_false = (RadioButton)findViewById(R.id.btn_isDisabled_false);
+
+        RG_family_state = (RadioGroup)findViewById(R.id.familyStateRadioGroup);
+        rb_family_state_true = (RadioButton)findViewById(R.id.btn_family_state_true);
+        rb_family_state_false = (RadioButton)findViewById(R.id.btn_family_state_false);
+
+        RG_interest = (RadioGroup)findViewById(R.id.interestRadioGroup);
+        rb_interest0 = (RadioButton)findViewById(R.id.rb_interest0);
+        rb_interest1 = (RadioButton)findViewById(R.id.rb_interest1);
+        rb_interest2 = (RadioButton)findViewById(R.id.rb_interest2);
+        rb_interest3 = (RadioButton)findViewById(R.id.rb_interest3);
+        rb_interest4 = (RadioButton)findViewById(R.id.rb_interest4);
+        rb_interest5 = (RadioButton)findViewById(R.id.rb_interest5);
+        rb_interest6 = (RadioButton)findViewById(R.id.rb_interest6);
+
+        spinner_life_cycle = (Spinner)findViewById(R.id.spinner_life_cycle);
+
+        // life_cycle with spinner
+        ArrayAdapter<String> life_cycle_adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, life_cycle_items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner_life_cycle.setAdapter(life_cycle_adapter);
+        spinner_life_cycle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                life_cycle = position;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                life_cycle = -1;
+            }
+        });
 
         try{
-            mTokenJson.put("mToken", mToken);
-            Log.v("mTokenJson:", mTokenJson.getString("mToken"));
-            Log.v("fetchData start", "start");
-            fetchData(mTokenJson);
-            Log.v("fetchData complete", "complete");
+            fetchData(token);
         }
-        catch(JSONException err){
-            Log.v("JSONException : mToken can not found", err.getMessage());
+        catch(Exception err){
+            Log.v("Exception :toke / fetchData Error", err.getMessage());
         }
 
         // btn_back button listener
@@ -242,9 +321,9 @@ public class ProfileActivity extends AppCompatActivity {
 
                 int user_interest = interest;
 
-//                editUserInfo(user_name, user_id, user_password, user_gender,
-//                        user_income, user_address, user_life_cycle, user_is_multicultural,
-//                        user_is_one_parent, user_is_disabled, user_interest);
+                editUserInfo(user_name, user_id, user_password, user_gender,
+                        user_income, user_address, user_life_cycle, user_is_multicultural,
+                        user_is_one_parent, user_is_disabled, user_interest);
 
                 Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
                 intent.putExtras(bundle);
@@ -254,81 +333,104 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void fetchData(JSONObject mTokenJson){
-        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, URLs.url_read,mTokenJson, new Response.Listener<JSONObject>() {
+    private void fetchData(String token){
+
+        // read user data
+        SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+
+        JSONObject params = new JSONObject();
+
+        try{
+            params.put("token", token);
+            Log.v("ProfileActivity params complete: ", "true");
+        }
+        catch(JSONException e){
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, URLs.url_read, params, new Response.Listener<JSONObject>(){
             @Override
             public void onResponse(JSONObject response) {
-                Log.v("fetchData - response: ", response.toString());
-                Log.v("fetchData - onResponse: ", "success");
+                Log.v("fetchData response",  "true");
                 try{
-                    JSONObject userJson = response.getJSONObject("user");
-                    Log.v("userJson: ", userJson.getString("user_name"));
+                    Log.v("fetchData response", response.toString());
 
-                    // userJson to User data
-                    String user_name = userJson.getString("user_name");
-                    String user_id = userJson.getString("user_id");
-                    String user_password = userJson.getString("user_password");
-                    int user_gender = userJson.getInt("user_gender");
-                    int user_income = userJson.getInt("user_income");
-                    String user_address = userJson.getString("user_address");
-                    int user_life_cycle = userJson.getInt("user_life_cycle");
-                    int user_is_multicultural = userJson.getInt("user_is_multicultural");
-                    int user_is_one_parent = userJson.getInt("user_is_one_parent");
-                    int user_is_disabled = userJson.getInt("user_is_disabled");
-                    int user_interest = userJson.getInt("user_interest");
+                    String token = response.getString("token");
+                    Boolean isSuccess = response.getBoolean("success");
+                    int statusCode = response.getInt("statusCode");
+
+                    Log.v("fetchData response token", token);
+                    Log.v("fetchData response isSuccess", isSuccess.toString());
+                    Log.v("fetchData response statusCode", Integer.toString(statusCode));
+
+                    String user_name = response.getString("user_name");
+                    String user_id = response.getString("user_id");
+                    String user_password = response.getString("user_password");
+                    int user_gender = response.getInt("user_gender");
+                    int user_income = response.getInt("user_income");
+                    String user_address = response.getString("user_address");
+                    int user_life_cycle = response.getInt("user_life_cycle");
+                    int user_is_multicultural = response.getInt("user_is_multicultural");
+                    int user_is_one_parent = response.getInt("user_is_one_parent");
+                    int user_is_disabled = response.getInt("user_is_disabled");
+                    int user_interest = response.getInt("user_interest");
 
                     et_username.setText(user_name);
                     et_id.setText(user_id);
                     et_pwd.setText(user_password);
 
-                    if(user_gender == 1){
-                        rb_male.setChecked(true);
-                    }
-                    else{
-                        rb_female.setChecked(true);
-                    }
-                    spinner_income.setSelection(user_income, true);
-
-                    spinner_life_cycle.setSelection(user_life_cycle, true);
-                    spinner_address_city.setSelection(0, true);
-                    spinner_address_city.setSelection(0, true);
-
-                    if(user_is_multicultural == 1){
-                        rb_is_multicultural_true.setChecked(true);
-                    }
-                    else{
-                        rb_is_multicultural_false.setChecked(true);
-                    }
-
-                    if(user_is_one_parent == 1){
-                        rb_family_state_true.setChecked(true);
-                    }
-                    else{
-                        rb_family_state_false.setChecked(true);
-                    }
-
-                    if(user_is_disabled == 1){
-                        rb_is_disabled_true.setChecked(true);
-                    }
-                    else{
-                        rb_is_disabled_false.setChecked(true);
-                    }
+//                    if(user_gender == 1){
+//                        rb_male.setChecked(true);
+//                    }
+//                    else{
+//                        rb_female.setChecked(true);
+//                    }
+//                    spinner_income.setSelection(user_income, true);
+//
+//                    spinner_life_cycle.setSelection(user_life_cycle, true);
+//                    spinner_address_city.setSelection(0, true);
+//                    spinner_address_city.setSelection(0, true);
+//
+//                    if(user_is_multicultural == 1){
+//                        rb_is_multicultural_true.setChecked(true);
+//                    }
+//                    else{
+//                        rb_is_multicultural_false.setChecked(true);
+//                    }
+//
+//                    if(user_is_one_parent == 1){
+//                        rb_family_state_true.setChecked(true);
+//                    }
+//                    else{
+//                        rb_family_state_false.setChecked(true);
+//                    }
+//                    if(user_is_disabled == 1){
+//                        rb_is_disabled_true.setChecked(true);
+//                    }
+//                    else{
+//                        rb_is_disabled_false.setChecked(true);
+//                    }
 
                 }
                 catch(JSONException e){
                     e.printStackTrace();
                     Log.v("JSONException :", e.getMessage());
                 }
-            }},
-                new Response.ErrorListener() {
+            }
+        }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.v("request error / method : get :", error.getMessage());
-                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    //Log.v("fetchData request error", error.getMessage());
+                    //Toast.makeText(ProfileActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            }){
-            };
+            });
+
+        Log.v("jsonRequest", jsonRequest.toString());
+        Log.v("jsonRequest url", jsonRequest.getUrl());
+
         VolleySingleton.getInstance(this).addToRequestQueue(jsonRequest);
+
     };
 
     // function for edit button click
@@ -336,9 +438,8 @@ public class ProfileActivity extends AppCompatActivity {
                               int user_income, String user_address, int user_life_cycle, int user_is_multicultural,
                               int user_is_one_parent, int user_is_disabled, int user_interest){
 
-
-        // validate data
-        String user_mToken = "";
+        Bundle bundle = (Bundle) getIntent().getExtras();
+        String token = bundle.getString("token");
 
         // log list for variable request check
         Log.v("user_name_check", "user_name: " + user_name);
@@ -352,7 +453,6 @@ public class ProfileActivity extends AppCompatActivity {
         Log.v("user_is_one_parent_check", "user_is_one_parent: " + user_is_one_parent);
         Log.v("user_is_disabled_check", "user_is_disabled: " + user_is_disabled);
         Log.v("user_interest_check", "user_interest: " + user_interest);
-        Log.v("user_mToken_check", "user_mToken: " + user_mToken);
 
         // Register Request
         JSONObject params = new JSONObject();
@@ -369,11 +469,14 @@ public class ProfileActivity extends AppCompatActivity {
             params.put("user_is_one_parent", user_is_one_parent);
             params.put("user_is_disabled", user_is_disabled);
             params.put("user_interest", user_interest);
-            //params.put("user_mToken", user_mToken);
+            params.put("token", token);
+            params.put("token_firebase", "");
+            Log.v("editUserInfo params added","success");
         }
         catch(JSONException e){
             e.printStackTrace();
         }
+
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.PUT, URLs.url_update, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -381,12 +484,13 @@ public class ProfileActivity extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(),response.getString("message"), Toast.LENGTH_SHORT).show();
 
-                    // getting the user from the response
-                    JSONObject userJson = response.getJSONObject("user");
-                    Log.v("userJson: ", userJson.getString("user_name"));
-                    isSuccess = response.getBoolean("success");
-                    statusCode = response.getInt("statusCode");
-                    token = response.getString("token");
+                    Boolean isSuccess = response.getBoolean("success");
+                    int statusCode = response.getInt("statusCode");
+                    String token_response = response.getString("token");
+
+                    Log.v("on edit  response isSuccess", isSuccess.toString());
+                    Log.v("on edit  response statusCode", Integer.toString(statusCode));
+                    Log.v("on edit  response token", token_response);
 
                 }
                 catch(JSONException e){

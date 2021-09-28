@@ -3,6 +3,7 @@ package com.example.tave0915;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -82,10 +83,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     int interest;
 
-    public Boolean isSuccess;
-    public int  statusCode;
-    public String mToken;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,7 +131,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                City = (String) city_items[0];
+                City = city_items[0];
             }
         });
 
@@ -281,9 +278,25 @@ public class RegisterActivity extends AppCompatActivity {
                         user_income, user_address, user_life_cycle, user_is_multicultural,
                         user_is_one_parent, user_is_disabled, user_interest);
 
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                SharedPreferences sharedPreferences= getSharedPreferences("user_info", MODE_PRIVATE);
+                Boolean isSuccess  = sharedPreferences.getBoolean("success", false);
+                String mToken = sharedPreferences.getString("token", "");
+                int statusCode = sharedPreferences.getInt("statusCode",0);
+
+                if(isSuccess){
+                    Log.v("Register success", isSuccess.toString());
+                    Bundle bundle = new Bundle();
+                    bundle.putString("token", mToken);
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    if(bundle!=null){
+                        intent.putExtras(bundle);
+                    }
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    Log.v("Register Process","failed");
+                }
             }
         });
 
@@ -302,7 +315,7 @@ public class RegisterActivity extends AppCompatActivity {
                               int user_income, String user_address, int user_life_cycle, int user_is_multicultural,
                               int user_is_one_parent, int user_is_disabled, int user_interest){
 
-        String user_mToken = "";
+        String token_firebase = "";
 
         // log list for variable request check
         Log.v("user_name_check", "user_name: " + user_name);
@@ -316,7 +329,6 @@ public class RegisterActivity extends AppCompatActivity {
         Log.v("user_is_one_parent_check", "user_is_one_parent: " + user_is_one_parent);
         Log.v("user_is_disabled_check", "user_is_disabled: " + user_is_disabled);
         Log.v("user_interest_check", "user_interest: " + user_interest);
-        Log.v("user_mToken_check", "user_mToken: " + user_mToken);
 
         // Register Request
         JSONObject params = new JSONObject();
@@ -333,24 +345,36 @@ public class RegisterActivity extends AppCompatActivity {
             params.put("user_is_one_parent", user_is_one_parent);
             params.put("user_is_disabled", user_is_disabled);
             params.put("user_interest", user_interest);
-            params.put("token_firebase","");
+            params.put("token_firebase",token_firebase);
+
+            Log.v("Register params input process","success");
         }
         catch(JSONException e){
             e.printStackTrace();
+            Log.v("Register params input process","failed");
         }
+
+        SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, URLs.url_register, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try{
                     Toast.makeText(getApplicationContext(),response.getString("message"), Toast.LENGTH_SHORT).show();
 
-                    isSuccess = response.getBoolean("success");
-                    mToken = response.getString("token");
-                    statusCode =  response.getInt("statusCode");
+                    Boolean isSuccess = response.getBoolean("success");
+                    String token = response.getString("token");
+                    int statusCode =  response.getInt("statusCode");
+
+                    editor.putString("token", token);
+                    editor.putInt("statusCode", statusCode);
+                    editor.putBoolean("success", isSuccess);
+                    editor.commit();
 
                     Log.v("on register response isSuccess: ", isSuccess.toString());
                     Log.v("on register response statusCode : ", Integer.toString(statusCode));
-                    Log.v("on register response mToken: ", mToken);
+                    Log.v("on register response mToken: ", token);
 
                 }
                 catch(JSONException e){
@@ -369,12 +393,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         Log.v("register process -- jsonRequest", jsonRequest.toString());
         Log.v("register process -- jsonRequest url: ", jsonRequest.getUrl());
+
         VolleySingleton.getInstance(this).addToRequestQueue(jsonRequest);
-        if(isSuccess){
-            Toast.makeText(getApplicationContext(), "회원가입이 성공하셨습니다.", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(getApplicationContext(), "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-        }
+        Toast.makeText(getApplicationContext(), "회원가입이 성공하셨습니다.", Toast.LENGTH_SHORT).show();
     }
 }

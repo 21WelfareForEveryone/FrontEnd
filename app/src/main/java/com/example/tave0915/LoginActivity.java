@@ -1,5 +1,6 @@
 package com.example.tave0915;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -29,9 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et_pwd;
     private EditText et_id;
 
-    public Boolean isSuccess;
-    public int  statusCode;
-    public String mToken;
+    UserLoginInfo userLoginInfo = new UserLoginInfo();
+    RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,18 +51,19 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                UserLoginInfo loginInfoOnClick = (UserLoginInfo) userLogin();
-//                Boolean loginSuccess = loginInfoOnClick.getIsSuccess();
-//                String mToken = loginInfoOnClick.getToken();
-//                Log.v("userLoginInfo loginSuccess", loginSuccess.toString());
-//                Log.v("userLoginInfo mToken", mToken);
-                isSuccess = true;
-                //userLogin();
+                userLogin();
+                SharedPreferences sharedPreferences= getSharedPreferences("user_info", MODE_PRIVATE);
+                Boolean isSuccess  = sharedPreferences.getBoolean("success", false);
+                String mToken = sharedPreferences.getString("token", "");
+                int statusCode = sharedPreferences.getInt("statusCode",0);
+                Log.v("sharedPreference  isSuccess", Boolean.toString(isSuccess));
+                Log.v("sharedPreference  mToken", mToken);
+
                 if(isSuccess){
-                    Log.v("Login success?", isSuccess.toString());
-                    // 해당 값들을 저장할 수 있는 함수 구현(json형태로 다른 파트로 이동)
+                    Log.v("Login success", isSuccess.toString());
+
                     Bundle bundle = new Bundle();
-                    bundle.putString("mToken", mToken);
+                    bundle.putString("token", mToken);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     if(bundle!=null){
                         intent.putExtras(bundle);
@@ -71,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }
                 else{
-                    Log.v("Login success?","failed");
+                    Log.v("Login success","failed");
                 }
             }
         });
@@ -94,14 +96,14 @@ public class LoginActivity extends AppCompatActivity {
         final String pwd = et_pwd.getText().toString();
 
         JSONObject params = new JSONObject();
-//        UserLoginInfo userLoginInfo = new UserLoginInfo();
-//        userLoginInfo.setToken("test");
-//        userLoginInfo.setIsSuccess(true);
-//        userLoginInfo.setStatusCode(777);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences.edit();
 
         try{
             params.put("user_id", id);
             params.put("user_password", pwd);
+            Log.v("params complete: ", "true");
         }
         catch(JSONException e){
             e.printStackTrace();
@@ -119,43 +121,34 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        Log.v("params complete: ", "true");
-
         final JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, URLs.url_login, params, new Response.Listener<JSONObject>(){
             @Override
             public void onResponse(JSONObject response) {
-                Log.v("response: ", response.toString());
+                Log.v("login onResponse", "true");
                 try{
-//                    userLoginInfo.setIsSuccess(response.getBoolean("success"));
-//                    userLoginInfo.setToken(response.getString("token"));
-//                    userLoginInfo.setStatusCode(response.getInt("statusCode"));
 
-                    isSuccess = response.getBoolean("success");
-                    mToken = response.getString("token");
-                    statusCode =  response.getInt("statusCode");
-
-                    Log.v("on login response isSuccess: ", isSuccess.toString());
-                    Log.v("on login response statusCode : ", Integer.toString(statusCode));
-                    Log.v("on login response mToken: ", mToken);
+                    Boolean isSuccess = response.getBoolean("success");
+                    String mToken = response.getString("token");
+                    int statusCode =  response.getInt("statusCode");
+                    editor.putString("token", mToken);
+                    editor.putInt("statusCode", statusCode);
+                    editor.putBoolean("success", isSuccess);
+                    editor.commit();
+                    Log.v("on login response isSuccess", isSuccess.toString());
+                    Log.v("on login response statusCode", Integer.toString(statusCode));
+                    Log.v("on login response mToken", mToken);
                 }
                 catch(JSONException e){
                     e.printStackTrace();
-                    Log.v("에러 ", e.getMessage());
-
-                    isSuccess = false;
-                    mToken = "";
-                    statusCode = 500;
+                    Log.d("JSONException error", e.getMessage());
                 }
             }
         },
                 new Response.ErrorListener(){
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        isSuccess = false;
-                        mToken = "";
-                        statusCode = 500;
-                        Log.v("Server Error", "response denied");
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.d("Server Error", "response denied");
+                        Toast.makeText(LoginActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }){
             @Override
@@ -167,19 +160,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
-//        userLoginInfo.setIsSuccess(isSuccess);
-//        userLoginInfo.setToken(mToken);
-//        userLoginInfo.setStatusCode(statusCode);
-
         Log.v("jsonRequest", jsonRequest.toString());
-        Log.v("jsonRequest url: ", jsonRequest.getUrl());
+        Log.v("jsonRequest url", jsonRequest.getUrl());
 
         VolleySingleton.getInstance(this).addToRequestQueue(jsonRequest);
-        if(isSuccess){
-            Toast.makeText(getApplicationContext(), "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(getApplicationContext(), "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
-        }
+        Toast.makeText(getApplicationContext(), "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
     }
 }

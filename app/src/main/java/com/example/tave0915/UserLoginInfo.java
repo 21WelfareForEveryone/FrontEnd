@@ -10,11 +10,6 @@ public class UserLoginInfo {
     public UserLoginInfo(){
 
     }
-//    public UserLoginInfo(String mToken, Boolean isSuccess, int statusCode){
-//        this.mToken = mToken;
-//        this.isSuccess = isSuccess;
-//        this.statusCode = statusCode;
-//    }
 
     public void setToken(String mToken) {
         this.mToken = mToken;
