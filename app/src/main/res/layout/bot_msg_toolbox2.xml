@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="left"
+    android:layout_margin="5dp"
+    android:elevation="8dp"
+    app:cardElevation="0dp"
+    android:backgroundTint="@android:color/transparent"
+    android:background = "@android:color/transparent"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_gravity="left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src = "@drawable/chatbot_icon_temp"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:background="@drawable/bot_msg_box_container"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:id = "@+id/idTVBot_title1"
+                android:text = "ChatBot Message"
+                android:gravity="left"
+                android:fontFamily="@font/font"
+                android:textStyle="normal"
+                android:textSize="10sp"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:id = "@+id/idTVBot_summary1"
+                android:text = "ChatBot Message"
+                android:gravity="left"
+                android:fontFamily="@font/font"
+                android:textStyle="normal"
+                android:textSize="8sp"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:id = "@+id/idTVBot_title2"
+                android:text = "ChatBot Message"
+                android:gravity="left"
+                android:fontFamily="@font/font"
+                android:textStyle="normal"
+                android:textSize="10sp"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:id = "@+id/idTVBot_summary2"
+                android:text = "ChatBot Message"
+                android:gravity="left"
+                android:fontFamily="@font/font"
+                android:textStyle="normal"
+                android:textSize="8sp"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:id = "@+id/idTVBot_title3"
+                android:text = "ChatBot Message"
+                android:gravity="left"
+                android:fontFamily="@font/font"
+                android:textStyle="normal"
+                android:textSize="10sp"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:id = "@+id/idTVBot_summary3"
+                android:text = "ChatBot Message"
+                android:gravity="left"
+                android:fontFamily="@font/font"
+                android:textStyle="normal"
+                android:textSize="8sp"
+                android:textColor="#000000"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
