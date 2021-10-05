@@ -360,6 +360,7 @@ public class RegisterActivity extends AppCompatActivity {
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, URLs.url_register, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                Log.v("register onResponse", "true");
                 try{
                     Toast.makeText(getApplicationContext(),response.getString("message"), Toast.LENGTH_SHORT).show();
 
@@ -387,6 +388,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.v("Register onResponse", "false");
                     }
                 }){
         };
@@ -394,7 +396,12 @@ public class RegisterActivity extends AppCompatActivity {
         Log.v("register process -- jsonRequest", jsonRequest.toString());
         Log.v("register process -- jsonRequest url: ", jsonRequest.getUrl());
 
-        VolleySingleton.getInstance(this).addToRequestQueue(jsonRequest);
-        Toast.makeText(getApplicationContext(), "회원가입이 성공하셨습니다.", Toast.LENGTH_SHORT).show();
+        if(sharedPreferences.getBoolean("success", false)){
+            VolleySingleton.getInstance(this).addToRequestQueue(jsonRequest);
+            Toast.makeText(getApplicationContext(), "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "회원가입에 실패했습니다..", Toast.LENGTH_SHORT).show();
+        }
     }
 }

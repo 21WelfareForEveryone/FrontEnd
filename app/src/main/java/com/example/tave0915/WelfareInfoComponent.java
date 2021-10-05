@@ -12,7 +12,18 @@ public class WelfareInfoComponent {
     private String sites;
     private int category;
 
-    public WelfareInfoComponent(){
+    public WelfareInfoComponent(int welfare_id, String title, String summary, String who, String criteria,
+                                String what, String how, String info_calls, String sites, int category){
+        this.welfare_id = welfare_id;
+        this.title = title;
+        this.summary = summary;
+        this.who = who;
+        this.criteria = criteria;
+        this.what = what;
+        this.how = how;
+        this.info_calls = info_calls;
+        this.sites = sites;
+        this.category = category;
     };
     public void setWelfare_id(int welfare_id){
         this.welfare_id = welfare_id;
