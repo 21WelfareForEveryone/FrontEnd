@@ -38,6 +38,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private final String BOT_KEY = "bot";
     private final String USER_KEY = "user";
+    private final String BOT_INFO_KEY = "bot-welfare-info";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +114,7 @@ public class ChatActivity extends AppCompatActivity {
 
     // get & post api
     private void getResponse(String text, String token){
-        chatModelArrayList.add(new ChatModel(text, USER_KEY));
+        chatModelArrayList.add(new ChatModel(text, USER_KEY, null, null));
         chatRVAdapter.notifyDataSetChanged();
 
         // params : post에 필요한 변수
@@ -171,6 +172,8 @@ public class ChatActivity extends AppCompatActivity {
 
                             editor.putString(titleName, obj.getString("title"));
                             editor.putString(summaryName, obj.getString("summary"));
+                            Log.v("chatbot message response titleName", obj.getString("title"));
+                            Log.v("chatbot message response summary", obj.getString("summary"));
                         }
 
                         editor.putInt("num_info", jar_len);
@@ -213,17 +216,21 @@ public class ChatActivity extends AppCompatActivity {
 
             if(chatResponse.getInt("message_type",0)==0){
                 String chat_response = chatResponse.getString("message_content", "");
-                chatModelArrayList.add(new ChatModel(chat_response, BOT_KEY));
+                chatModelArrayList.add(new ChatModel(chat_response, BOT_KEY, null, null));
                 chatRVAdapter.notifyDataSetChanged();
             }
             else if(chatResponse.getInt("message_type",0)==1){
                 int jar_len = chatResponse.getInt("num_info",0);
+                String[] welfareInfoTitle = new String[jar_len];
+                String[] welfareInfoSummary= new String[jar_len];
                 for(int i = 0; i < jar_len; i++){
                     String titleName = "welfare_title" + Integer.toString(i+1);
                     String summaryName = "welfare_summary" + Integer.toString(i+1);
+                    welfareInfoTitle[i] = chatResponse.getString(titleName, "");
+                    welfareInfoSummary[i] = chatResponse.getString(summaryName, "");
                 }
 
-                chatModelArrayList.add(new ChatModel("test for message_type = 1", BOT_KEY));
+                chatModelArrayList.add(new ChatModel("", BOT_INFO_KEY, welfareInfoTitle, welfareInfoSummary));
                 chatRVAdapter.notifyDataSetChanged();
             }
             else{
@@ -231,7 +238,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         }
         else{
-            chatModelArrayList.add(new ChatModel("Server Error!", BOT_KEY));
+            chatModelArrayList.add(new ChatModel("Server Error!", BOT_KEY, null, null));
             chatRVAdapter.notifyDataSetChanged();
         }
 

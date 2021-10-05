@@ -28,6 +28,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
+        Bundle bundle = getIntent().getExtras();
+
         fragmentManager = getFragmentManager();
         mapFragment = (MapFragment)fragmentManager.findFragmentById(R.id.googleMap);
         mapFragment.getMapAsync(this);
@@ -41,11 +43,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 switch(item.getItemId()){
                     case R.id.navigation_1:
                         Intent intent = new Intent(MapActivity.this, MainActivity.class);
+                        intent.putExtras(bundle);
                         startActivity(intent);
                         finish();
                         return true;
                     case R.id.navigation_2:
                         Intent intent2 = new Intent(MapActivity.this, ChatActivity.class);
+                        intent2.putExtras(bundle);
                         startActivity(intent2);
                         finish();
                         return true;
@@ -53,6 +57,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         return true;
                     case R.id.navigation_4:
                         Intent intent4 = new Intent(MapActivity.this, MyProfileActivity.class);
+                        intent4.putExtras(bundle);
                         startActivity(intent4);
                         finish();
                         return true;

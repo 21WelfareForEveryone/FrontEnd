@@ -102,6 +102,10 @@
         android:layout_marginRight="25dp"
         android:layout_width="match_parent"
         android:layout_height="280dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id = "@+id/RV_welfare_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

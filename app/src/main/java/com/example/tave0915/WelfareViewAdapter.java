@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class WelfareViewAdapter extends RecyclerView.Adapter<WelfareViewAdapter.ViewHolder> {
 
     private ArrayList<WelfareInfoComponent> CardList = null;
+//    private Context context;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title;
@@ -24,12 +25,11 @@ public class WelfareViewAdapter extends RecyclerView.Adapter<WelfareViewAdapter.
             // 뷰 객체에 대한 참조. (hold strong reference)
             tv_title = itemView.findViewById(R.id.tv_title);
             tv_summary = itemView.findViewById(R.id.tv_summary);
-
         }
     }
 
     public WelfareViewAdapter(ArrayList<WelfareInfoComponent> list) {
-        CardList = list ;
+        this.CardList = list ;
     }
 
     @Override

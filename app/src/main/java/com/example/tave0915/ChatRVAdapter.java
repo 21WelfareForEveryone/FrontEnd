@@ -31,6 +31,9 @@ public class ChatRVAdapter extends RecyclerView.Adapter{
             case 1:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bot_msg_toolbox, parent, false);
                 return new BotViewHolder(view);
+            case 2:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bot_msg_toolbox2, parent, false);
+                return new BotViewHolder2(view);
         }
         return null;
     }
@@ -45,7 +48,14 @@ public class ChatRVAdapter extends RecyclerView.Adapter{
             case "bot":
                 ((BotViewHolder)holder).botMsgTV.setText(chatModel.getMessage());
                 break;
-            case "bot-welfare-info":  // bot_msg_toolbox2을 위해 추가...
+            case "bot-welfare-info":
+                /* bot_msg_toolbox2 component editor */
+                ((BotViewHolder2)holder).botMsgTV_title1.setText(chatModel.getWelfareInfoTitleArray()[0]);
+                ((BotViewHolder2)holder).botMsgTV_title2.setText(chatModel.getWelfareInfoTitleArray()[1]);
+                ((BotViewHolder2)holder).botMsgTV_title3.setText(chatModel.getWelfareInfoTitleArray()[2]);
+                ((BotViewHolder2)holder).botMsgTV_summary1.setText(chatModel.getWelfareInfoSummaryArray()[0]);
+                ((BotViewHolder2)holder).botMsgTV_summary2.setText(chatModel.getWelfareInfoSummaryArray()[1]);
+                ((BotViewHolder2)holder).botMsgTV_summary3.setText(chatModel.getWelfareInfoSummaryArray()[2]);
                 break;
         }
     }
