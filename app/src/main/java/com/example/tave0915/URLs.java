@@ -11,6 +11,7 @@ public class URLs {
     * url_read : user 정보 읽기(MyProfileActivity, 적용 X)
     * url_chatbot : ChatBot getResponse(ChatActivity)
     * url_my_welfare: user의 관심 복지 리스트 호출(MyProfileActivity)
+    * url_welfare_search : user의 카테고리별 복지 리스트 호출
     * */
 
     private static final String root_url = "http://34.64.177.178";
@@ -21,4 +22,5 @@ public class URLs {
     public static final String url_read = root_url + "/rest/user/read" ;
     public static final String url_chatbot = root_url + "/chatbot/getresponse";
     public static final String url_my_welfare = root_url + "/rest/dibs/read";
+    public static final String url_welfare_search = root_url + "/rest/welfare/search";
 }

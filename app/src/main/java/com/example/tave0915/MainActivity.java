@@ -22,23 +22,53 @@ public class MainActivity extends AppCompatActivity {
     private MainRVAdapter mainRVAdapter;
     private ArrayList<MainCategoryCard> categoryList;
 
+    // Recommended Welfare Info RV list
+    private WelfareViewAdapter welfareViewAdapter;
+    private ArrayList<WelfareInfoComponent> welfareInfoComponentArrayList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Bundle bundle = getIntent().getExtras();
+        String token = bundle.getString("token");
 
-//        RecyclerView RV_category = (RecyclerView)findViewById(R.id.RV_category);
-//        categoryList = new ArrayList<>();
-//        mainRVAdapter = new MainRVAdapter(categoryList, getApplicationContext());
-//
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        RV_category.setLayoutManager(linearLayoutManager);
-//        RV_category.setAdapter(mainRVAdapter);
+        RecyclerView RV_category = (RecyclerView)findViewById(R.id.RV_category);
+        categoryList = new ArrayList<>();
 
+        for(int i = 0; i<16; i++){
+            String categoryName = "카테고리 " + Integer.toString(i+1);
+            MainCategoryCard categoryCard = new MainCategoryCard(categoryName);
+            categoryList.add(categoryCard);
+        }
 
+        mainRVAdapter = new MainRVAdapter(categoryList, getApplicationContext(), token);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        RV_category.setLayoutManager(linearLayoutManager);
+        RV_category.setAdapter(mainRVAdapter);
+
+        // Recommended welfare Info data loaded
+        RecyclerView welfareRecommendedRV = (RecyclerView)findViewById(R.id.welfare_recommended_RV);
+        welfareInfoComponentArrayList = new ArrayList<>();
+
+        welfareViewAdapter = new WelfareViewAdapter(welfareInfoComponentArrayList);
+        LinearLayoutManager welfareLinearLayoutManger = new LinearLayoutManager(this);
+
+        welfareRecommendedRV.setLayoutManager(welfareLinearLayoutManger);
+        welfareRecommendedRV.setAdapter(welfareViewAdapter);
+
+        try{
+            getRecommendedWelfareInfo(token);
+            Log.v("MainActivity recommended welfare info load process","success");
+        }
+        catch(Exception err){
+            Log.v("MainActivity recommended welfare info load process","failed");
+        }
+
+        // navigation onClickListener
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.navigation_1);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -70,5 +100,9 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void getRecommendedWelfareInfo(String token){
+
     }
 }
