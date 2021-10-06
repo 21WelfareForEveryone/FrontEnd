@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.v("sharedPreference  mToken", mToken);
 
                 if(isSuccess){
-                    Log.v("Login success", isSuccess.toString());
+                    Log.v("Login Process", isSuccess.toString());
 
                     Bundle bundle = new Bundle();
                     bundle.putString("token", mToken);
@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }
                 else{
-                    Log.v("Login success","failed");
+                    Log.v("Login Process","failed");
                 }
             }
         });
@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.ErrorListener(){
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("Server Error", "response denied");
+                        Log.v("login onResponse", "false");
                         Toast.makeText(LoginActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }){
@@ -163,7 +163,12 @@ public class LoginActivity extends AppCompatActivity {
         Log.v("jsonRequest", jsonRequest.toString());
         Log.v("jsonRequest url", jsonRequest.getUrl());
 
-        VolleySingleton.getInstance(this).addToRequestQueue(jsonRequest);
-        Toast.makeText(getApplicationContext(), "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
+        if(sharedPreferences.getBoolean("success", false)){
+            VolleySingleton.getInstance(this).addToRequestQueue(jsonRequest);
+            Toast.makeText(getApplicationContext(), "로그인에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "로그인에 실패했습니다..", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -2,6 +2,8 @@ package com.example.tave0915;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.ViewHolder
 
     private ArrayList<MainCategoryCard> CardList = null;
     private Context mContext;
+    String token;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title;
@@ -28,9 +31,10 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.ViewHolder
         }
     }
 
-    public MainRVAdapter(ArrayList<MainCategoryCard> list, Context mContext) {
+    public MainRVAdapter(ArrayList<MainCategoryCard> list, Context mContext, String token) {
         this.CardList = list ;
         this.mContext = mContext;
+        this.token = token;
     }
 
 
@@ -49,12 +53,23 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.ViewHolder
     public void onBindViewHolder(@NonNull MainRVAdapter.ViewHolder holder, int position) {
         MainCategoryCard categoryCard = CardList.get(position);
         holder.tv_title.setText(categoryCard.getCategory_title());
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int category_num = Integer.parseInt(categoryCard.getCategory_title().replaceAll("\\D+",""));
+                Bundle bundle = new Bundle();
+                bundle.putString("token", token);
+                bundle.putInt("category",category_num);
                 Context context = v.getContext();
-                Intent intent = new Intent(v.getContext(), ListActivity.class);
-                mContext.startActivity(intent);
+                try{
+                    Intent intent = new Intent(context, ListActivity.class);
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
+                catch(Exception err){
+                    Log.v("Category to ListActivity intent process","error");
+                }
             }
         });
     }
@@ -63,4 +78,6 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.ViewHolder
     public int getItemCount() {
         return CardList.size();
     }
+
+    public String getToken(){return this.token;}
 }

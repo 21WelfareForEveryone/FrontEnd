@@ -52,7 +52,11 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_width="match_parent"
-        android:layout_height="302dp">
+        android:layout_height="275dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id = "@+id/welfare_recommended_RV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
     <TextView
@@ -81,7 +85,7 @@
         android:textSize="12sp"
         android:textColor="#ffffff"
         android:lineSpacingExtra="5sp"
-        android:text="총 10개의 카테고리가 있습니다"/>
+        android:text="총 16개의 카테고리가 있습니다"/>
 
     <androidx.recyclerview.widget.RecyclerView
         app:layout_constraintTop_toBottomOf="@id/sub_title_category"
@@ -92,12 +96,13 @@
         android:id="@+id/RV_category"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop = "15dp"
         android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:clipChildren="false"
-        android:clipToPadding="false"
-        android:scaleType="fitXY" />
-
+        android:clipToPadding="false" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         app:layout_constraintBottom_toBottomOf="parent"
