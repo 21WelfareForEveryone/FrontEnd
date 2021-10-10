@@ -98,7 +98,6 @@ public class ListActivity extends AppCompatActivity {
                 try{
                     Boolean isSuccess = response.getBoolean("success");
                     int statusCode = response.getInt("statusCode");
-                    String responseToken = response.getString("token");
                     JSONArray jar = response.getJSONArray("welfare_list");
 
                     Log.v("ListActivity response isSuccess", isSuccess.toString());
@@ -107,16 +106,43 @@ public class ListActivity extends AppCompatActivity {
 
                     editor.putBoolean("success", isSuccess);
                     editor.putInt("statusCode", statusCode);
+                    editor.putInt("totalNum", jar.length());
 
-                    if(jar.length() != 0){
-                        // test : index 0 information loaded
-                        int welfare_id = jar.getJSONObject(0).getInt("welfare_id");
-                        String title = jar.getJSONObject(0).getString("title");
-                        String summary = jar.getJSONObject(0).getString("summary");
+                    if(jar.length() > 0){
+                        for(int i = 0 ; i < jar.length() ; i++){
+                            int welfare_id = jar.getJSONObject(i).getInt("welfare_id");
+                            String title = jar.getJSONObject(i).getString("title");
+                            String summary = jar.getJSONObject(i).getString("summary");
+                            String who = jar.getJSONObject(i).getString("who");
+                            String criteria = jar.getJSONObject(i).getString("criteria");
+                            String what = jar.getJSONObject(i).getString("what");
+                            String how = jar.getJSONObject(i).getString("how");
+                            String info_calls = jar.getJSONObject(i).getString("calls");
+                            String sites  = jar.getJSONObject(i).getString("sites");
 
-                        editor.putInt("welfare_id", welfare_id);
-                        editor.putString("title", title);
-                        editor.putString("summary", summary);
+                            String key = "welfare_info_" + Integer.toString(i);
+                            ArrayList<String> list = new ArrayList<String>();
+                            list.add(Integer.toString(welfare_id));
+                            list.add(title);
+                            list.add(summary);
+                            list.add(who);
+                            list.add(criteria);
+                            list.add(what);
+                            list.add(how);
+                            list.add(info_calls);
+                            list.add(sites);
+
+                            JSONArray a = new JSONArray();
+                            for (int j = 0; j < list.size(); j++) {
+                                a.put(list.get(j));
+                            }
+                            if (!list.isEmpty()) {
+                                editor.putString(key, a.toString());
+                                Log.v("ListActivity json array", a.toString());
+                            } else {
+                                editor.putString(key, null);
+                            }
+                        }
                         editor.commit();
                     }
                     else{
@@ -140,19 +166,39 @@ public class ListActivity extends AppCompatActivity {
         Log.v("ListActivity jsonObjectRequest url", jsonObjectRequest.getUrl());
 
         if(categoricalWelfareInfo.getBoolean("success",false)){
-            welfareInfoComponentArrayList.add(new WelfareInfoComponent(
-                    categoricalWelfareInfo.getInt("welfare_id",0),
-                    categoricalWelfareInfo.getString("title", ""),
-                    categoricalWelfareInfo.getString("summary", ""),
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    0
-            ));
-            welfareViewAdapter.notifyDataSetChanged();
+            Log.v("ListActivity categoricalWelfareInfo loaded", "true");
+            Log.v("ListActivity categoricalWelfareInfo num of info", Integer.toString(categoricalWelfareInfo.getInt("totalNum",0)));
+            for(int i = 0; i < categoricalWelfareInfo.getInt("totalNum",0); i++){
+                String key = "welfare_info_" + Integer.toString(i);
+                String json = categoricalWelfareInfo.getString(key, null);
+                Log.v("ListActivity JSON string type loaded", json.toString());
+                ArrayList<String> decode_list  = new ArrayList<String>();
+                if (json != null) {
+                    try {
+                        JSONArray a = new JSONArray(json);
+                        for (int j = 0; j < a.length(); j++) {
+                            String str = a.optString(j);
+                            Log.v("ListActivity JSON string parsing", str);
+                            decode_list.add(str);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                welfareInfoComponentArrayList.add(new WelfareInfoComponent(
+                        Integer.parseInt(decode_list.get(0)),
+                        decode_list.get(1),
+                        decode_list.get(2),
+                        decode_list.get(3),
+                        decode_list.get(4),
+                        decode_list.get(5),
+                        decode_list.get(6),
+                        decode_list.get(7),
+                        decode_list.get(8),
+                        0
+                ));
+                welfareViewAdapter.notifyDataSetChanged();
+            }
         }
         jsonObjectRequest.setShouldCache(false);
         VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);

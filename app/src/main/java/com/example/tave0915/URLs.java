@@ -12,6 +12,7 @@ public class URLs {
     * url_chatbot : ChatBot getResponse(ChatActivity)
     * url_my_welfare: user의 관심 복지 리스트 호출(MyProfileActivity)
     * url_welfare_search : user의 카테고리별 복지 리스트 호출
+    * url_welafre_recommend : user의 추천 복지 리스트 호출
     * */
 
     private static final String root_url = "http://34.64.177.178";
@@ -23,4 +24,5 @@ public class URLs {
     public static final String url_chatbot = root_url + "/chatbot/getresponse";
     public static final String url_my_welfare = root_url + "/rest/dibs/read";
     public static final String url_welfare_search = root_url + "/rest/welfare/search";
+    public static final String url_welfare_recommend = root_url +"/rest/welfare/recommend";
 }

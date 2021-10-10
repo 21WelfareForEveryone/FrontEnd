@@ -7,6 +7,28 @@
     android:background="#F2F2F2"
     tools:context=".MyProfileActivity">
 
+    <ImageButton
+        android:id = "@+id/btn_push"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src = "@drawable/ic_push_notification"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@android:color/transparent"/>
+
+    <ImageButton
+        android:id = "@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src = "@drawable/ic_logout"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@android:color/transparent"/>
+
     <androidx.cardview.widget.CardView
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

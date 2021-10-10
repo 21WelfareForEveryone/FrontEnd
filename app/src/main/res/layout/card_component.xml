@@ -7,6 +7,7 @@
     android:layout_margin="25dp"
     android:elevation="8dp"
     android:background = "@drawable/card_component_container"
+    android:id = "@+id/CV_welfare_info"
     >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

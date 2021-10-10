@@ -4,10 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/card_component_container.xml" value="0.25092592592592594" />
+        <entry key="app/src/main/res/drawable/menu_pf.xml" value="0.2388888888888889" />
+        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.13597376387487387" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_list.xml" value="0.13597376387487387" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_my_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/card_component.xml" value="0.25" />
         <entry key="app/src/main/res/layout/category_select_component.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/toolbar_main_info.xml" value="0.13597376387487387" />
+        <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.19074074074074074" />
       </map>
     </option>
   </component>

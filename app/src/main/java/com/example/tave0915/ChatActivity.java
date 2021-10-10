@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -79,6 +80,19 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+        // header btn_back onCLickListener
+        ImageButton btn_back = (ImageButton)findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatActivity.this, MainActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        // BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.navigation_2);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
