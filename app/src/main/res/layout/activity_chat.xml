@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChatActivity">
-    <include layout = "@layout/toolbar_main_info"/>
+    <include layout = "@layout/toolbar_chatbot"/>
     <FrameLayout
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/nav_view"

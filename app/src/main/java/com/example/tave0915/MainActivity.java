@@ -50,9 +50,13 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView RV_category = (RecyclerView)findViewById(R.id.RV_category);
         categoryList = new ArrayList<>();
 
+        String[] categoryItems = {"영유아","아동, 청소년", "청년", "중,장년", "노년", "장애인", "한부모", "다문화"
+                ,"저소득층", "교육", "고용", "주거", "건강","서민금융","문화","임신/출산"};
+
         for(int i = 0; i<16; i++){
-            String categoryName = "카테고리 " + Integer.toString(i+1);
-            MainCategoryCard categoryCard = new MainCategoryCard(categoryName);
+            //String categoryName = "카테고리 " + Integer.toString(i+1);
+            String categoryName = categoryItems[i];
+            MainCategoryCard categoryCard = new MainCategoryCard(categoryName, i);
             categoryList.add(categoryCard);
         }
 
@@ -145,19 +149,58 @@ public class MainActivity extends AppCompatActivity {
 
                     editor.putBoolean("success", isSuccess);
                     editor.putInt("statusCode", statusCode);
+                    editor.putInt("totalNum", jar.length());
 
-                    if(jar.length() != 0){
-                        int welfare_id = jar.getJSONObject(0).getInt("welfare_id");
-                        String title = jar.getJSONObject(0).getString("title");
-                        String summary = jar.getJSONObject(0).getString("summary");
+                    if(jar.length() > 0){
+                        for(int i = 0; i < jar.length();i++){
+                            Log.v("MainActivity for loop start",Integer.toString(i));
+                            Log.v("MainActivity jar", jar.toString());
+                            Log.v("MainActivity jar JSONObject", jar.getJSONObject(i).toString());
+                            Log.v("MainActivity jar obj", jar.get(i).toString());
 
-                        editor.putInt("welfare_id", welfare_id);
-                        editor.putString("title", title);
-                        editor.putString("summary", summary);
+                            int welfare_id = jar.getJSONObject(i).getInt("welfare_id");
+                            String title = jar.getJSONObject(i).getString("title");
+                            String summary = jar.getJSONObject(i).getString("summary");
+                            String who = jar.getJSONObject(i).getString("who");
+                            String criteria = jar.getJSONObject(i).getString("criteria");
+                            String what = jar.getJSONObject(i).getString("what");
+                            String how = jar.getJSONObject(i).getString("how");
+                            String info_calls = jar.getJSONObject(i).getString("calls");
+                            String sites  = jar.getJSONObject(i).getString("sites");
+
+                            Log.v("MainActivity welfare_id", Integer.toString(welfare_id));
+
+                            String key = "welfare_info_" + Integer.toString(i);
+                            ArrayList<String> list = new ArrayList<String>();
+                            list.add(Integer.toString(welfare_id));
+                            list.add(title);
+                            list.add(summary);
+                            list.add(who);
+                            list.add(criteria);
+                            list.add(what);
+                            list.add(how);
+                            list.add(info_calls);
+                            list.add(sites);
+
+                            JSONArray a = new JSONArray();
+                            for (int j = 0; j < list.size(); j++) {
+                                a.put(list.get(j));
+                            }
+                            if (!list.isEmpty()) {
+                                editor.putString(key, a.toString());
+                                Log.v("MyProfileActivity json array", a.toString());
+                            } else {
+                                editor.putString(key, null);
+                            }
+                        }
                         editor.commit();
-                    }
-                    else{
-                        editor.commit();
+                        //int welfare_id = jar.getJSONObject(0).getInt("welfare_id");
+                        //String title = jar.getJSONObject(0).getString("title");
+                        //String summary = jar.getJSONObject(0).getString("summary");
+                        //editor.putInt("welfare_id", welfare_id);
+                        //editor.putString("title", title);
+                        //editor.putString("summary", summary);
+                        //editor.commit();
                     }
                 }
                 catch(JSONException e){
@@ -181,20 +224,43 @@ public class MainActivity extends AppCompatActivity {
             String text = "총 "+ Integer.toString(recommendWelfareInfo.getInt("totalNum",0)) + "개의 복지가 있습니다.";
             TextView tv_num_list = (TextView)findViewById(R.id.sub_title);
             tv_num_list.setText(text);
+            for(int i = 0; i < recommendWelfareInfo.getInt("totalNum", 0); i++){
 
-            welfareInfoComponentArrayList.add(new WelfareInfoComponent(
-                    recommendWelfareInfo.getInt("welfare_id",0),
-                    recommendWelfareInfo.getString("title", ""),
-                    recommendWelfareInfo.getString("summary", ""),
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    0
-            ));
-            welfareViewAdapter.notifyDataSetChanged();
+                String key = "welfare_info_" + Integer.toString(i);
+                String json = recommendWelfareInfo.getString(key, null);
+                Log.v("MainActivity JSON string type loaded", json.toString());
+                ArrayList<String> decode_list  = new ArrayList<String>();
+                if (json != null) {
+                    try {
+                        JSONArray a = new JSONArray(json);
+                        for (int j = 0; j < a.length(); j++) {
+                            String str = a.optString(j);
+                            Log.v("MyProfile JSON string parsing", str);
+                            decode_list.add(str);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                welfareInfoComponentArrayList.add(new WelfareInfoComponent(
+                        Integer.parseInt(decode_list.get(0)),
+                        decode_list.get(1),
+                        decode_list.get(2),
+                        decode_list.get(3),
+                        decode_list.get(4),
+                        decode_list.get(5),
+                        decode_list.get(6),
+                        decode_list.get(7),
+                        decode_list.get(8),
+                        0
+                ));
+                welfareViewAdapter.notifyDataSetChanged();
+            }
+        }
+        else{
+            String text = "총 0개의 복지가 있습니다.";
+            TextView tv_num_list = (TextView)findViewById(R.id.sub_title);
+            tv_num_list.setText(text);
         }
         jsonObjectRequest.setShouldCache(false);
         VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);

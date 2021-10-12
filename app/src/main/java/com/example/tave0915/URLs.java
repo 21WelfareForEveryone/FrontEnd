@@ -12,10 +12,11 @@ public class URLs {
     * url_chatbot : ChatBot getResponse(ChatActivity)
     * url_my_welfare: user의 관심 복지 리스트 호출(MyProfileActivity)
     * url_welfare_search : user의 카테고리별 복지 리스트 호출
-    * url_welafre_recommend : user의 추천 복지 리스트 호출
+    * url_welfare_recommend : user의 추천 복지 리스트 호출
+    * url_welfare_read : 복지 정보 검색
     * */
 
-    private static final String root_url = "http://34.64.177.178";
+    private static final String root_url = "http://34.64.176.63:8080";
     public static final String url_register = root_url + "/rest/user/register";
     public static final String url_login = root_url + "/rest/user/login";
     public static final String url_update = root_url + "/rest/user/update";
@@ -25,4 +26,5 @@ public class URLs {
     public static final String url_my_welfare = root_url + "/rest/dibs/read";
     public static final String url_welfare_search = root_url + "/rest/welfare/search";
     public static final String url_welfare_recommend = root_url +"/rest/welfare/recommend";
+    public static final String url_welfare_read = root_url + "/rest/welfare/read";
 }

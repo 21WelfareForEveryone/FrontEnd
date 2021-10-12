@@ -274,6 +274,11 @@ public class MyProfileActivity extends AppCompatActivity {
                welfareViewAdapter.notifyDataSetChanged();
            }
         }
+        else{
+            String text = "총 0개의 복지가 있습니다.";
+            TextView tv_num_list = (TextView)findViewById(R.id.text_num_list);
+            tv_num_list.setText(text);
+        }
 
         jsonObjectRequest.setShouldCache(false);
         VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);

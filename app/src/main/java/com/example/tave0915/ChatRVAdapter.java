@@ -1,9 +1,14 @@
 package com.example.tave0915;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,9 +36,14 @@ public class ChatRVAdapter extends RecyclerView.Adapter{
             case 1:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bot_msg_toolbox, parent, false);
                 return new BotViewHolder(view);
+                /*
+                case 2:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bot_msg_toolbox2, parent, false);
+                    return new BotViewHolder2(view);
+                 */
             case 2:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bot_msg_toolbox2, parent, false);
-                return new BotViewHolder2(view);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bot_info_toolbox, parent, false);
+                return new BotInfoViewHolder(view);
         }
         return null;
     }
@@ -50,6 +60,7 @@ public class ChatRVAdapter extends RecyclerView.Adapter{
                 break;
             case "bot-welfare-info":
                 /* bot_msg_toolbox2 component editor */
+                /*
                 ((BotViewHolder2)holder).botMsgTV_title1.setText(chatModel.getWelfareInfoTitleArray()[0]);
                 ((BotViewHolder2)holder).botMsgTV_title2.setText(chatModel.getWelfareInfoTitleArray()[1]);
                 ((BotViewHolder2)holder).botMsgTV_title3.setText(chatModel.getWelfareInfoTitleArray()[2]);
@@ -57,6 +68,27 @@ public class ChatRVAdapter extends RecyclerView.Adapter{
                 ((BotViewHolder2)holder).botMsgTV_summary2.setText(chatModel.getWelfareInfoSummaryArray()[1]);
                 ((BotViewHolder2)holder).botMsgTV_summary3.setText(chatModel.getWelfareInfoSummaryArray()[2]);
                 break;
+                 */
+                ((BotInfoViewHolder)holder).botMsgTV_title.setText(chatModel.getTitle());
+                ((BotInfoViewHolder)holder).botMsgTV_summary.setText(chatModel.getSummary());
+                ((BotInfoViewHolder)holder).btn_detail.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.v("ChatActivity btn_detail click!", "true");
+                        int welfare_id = chatModel.getWelfare_id();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("welfare_id", welfare_id);
+                        Context context = v.getContext();
+                        try{
+                            Intent intent = new Intent(context, DetailActivity.class);
+                            intent.putExtras(bundle);
+                            context.startActivity(intent);
+                        }
+                        catch(Exception err){
+                            Log.v("ChatModel to DetailActivity intent process","error");
+                        }
+                    }
+                });
         }
     }
 
@@ -118,5 +150,17 @@ public class ChatRVAdapter extends RecyclerView.Adapter{
         }
     }
 
+    // new version of BotViewHolder2
+    public static class BotInfoViewHolder extends RecyclerView.ViewHolder{
+        TextView botMsgTV_title;
+        TextView botMsgTV_summary;
+        Button btn_detail;
 
+        public BotInfoViewHolder(@NonNull View itemView){
+            super(itemView);
+            botMsgTV_title = itemView.findViewById(R.id.idTVBot_title);
+            botMsgTV_summary = itemView.findViewById(R.id.idTVBot_summary);
+            btn_detail = itemView.findViewById(R.id.btn_detail);
+        }
+    }
 }

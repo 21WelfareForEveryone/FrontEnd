@@ -1,6 +1,8 @@
 package com.example.tave0915;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +55,7 @@ public class WelfareViewAdapter extends RecyclerView.Adapter<WelfareViewAdapter.
     public void onBindViewHolder(WelfareViewAdapter.ViewHolder holder, int position) {
 
         WelfareInfoComponent info = CardList.get(position);
+        int  welfare_id = info.getWelfare_id();
         try{
             //holder.welfare_img.setImageResource(R.drawable.img_category_00);
             holder.welfare_img.setImageResource(R.drawable.ic_user_profile);
@@ -61,14 +64,23 @@ public class WelfareViewAdapter extends RecyclerView.Adapter<WelfareViewAdapter.
             holder.welfare_img.setImageResource(R.drawable.ic_user_profile);
             err.printStackTrace();
         }
-
         holder.tv_title.setText(info.getTitle());
         holder.tv_summary.setText(info.getSummary());
         holder.cv_welfare_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.v("Welfare CardView click!","true");
-
+                Bundle bundle = new Bundle();
+                bundle.putInt("welfare_id", welfare_id);
+                Context context = v.getContext();
+                try{
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
+                catch(Exception err){
+                    Log.v("WelfareInfo to DetailActivity intent process","error");
+                }
             }
         });
     }

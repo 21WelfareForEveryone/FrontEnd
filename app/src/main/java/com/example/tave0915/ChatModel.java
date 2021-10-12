@@ -3,8 +3,12 @@ package com.example.tave0915;
 public class ChatModel {
     private String message;
     private String sender;
-    private String[] welfareInfoTitleArray;
-    private String[] welfareInfoSummaryArray;
+    private String[] welfareInfoTitleArray; // 폐기 예정
+    private String[] welfareInfoSummaryArray; // 폐기 예정
+
+    private String title;
+    private String summary;
+    private int welfare_id;
 
     public String getMessage() {
         return message;
@@ -22,11 +26,19 @@ public class ChatModel {
         this.sender = sender;
     }
 
-    public ChatModel(String message, String sender, String[] welfareInfoTitleArray, String[] welfareInfoSummaryArray) {
+//    public ChatModel(String message, String sender, String[] welfareInfoTitleArray, String[] welfareInfoSummaryArray) {
+//        this.message = message;
+//        this.sender = sender;
+//        this.welfareInfoTitleArray = welfareInfoTitleArray;
+//        this.welfareInfoSummaryArray = welfareInfoSummaryArray;
+//    }
+
+    public ChatModel(String message, String sender, String title, String summary, int welfare_id){
         this.message = message;
         this.sender = sender;
-        this.welfareInfoTitleArray = welfareInfoTitleArray;
-        this.welfareInfoSummaryArray = welfareInfoSummaryArray;
+        this.title = title;
+        this.summary = summary;
+        this.welfare_id = welfare_id;
     }
 
     public String[] getWelfareInfoTitleArray() {
@@ -43,5 +55,30 @@ public class ChatModel {
 
     public void setWelfareInfoSummaryArray(String[] welfareInfoSummaryArray) {
         this.welfareInfoSummaryArray = welfareInfoSummaryArray;
+    }
+
+    // chatModel Variables for message_type = 1
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public int getWelfare_id() {
+        return welfare_id;
+    }
+
+    public void setWelfare_id(int welfare_id) {
+        this.welfare_id = welfare_id;
     }
 }

@@ -57,7 +57,7 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.ViewHolder
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int category_num = Integer.parseInt(categoryCard.getCategory_title().replaceAll("\\D+",""));
+                int category_num = categoryCard.getCategory_num();
                 Bundle bundle = new Bundle();
                 bundle.putString("token", token);
                 bundle.putInt("category",category_num);

@@ -1,5 +1,7 @@
 package com.example.tave0915;
 
+import static com.example.tave0915.URLs.url_chatbot;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -128,7 +130,7 @@ public class ChatActivity extends AppCompatActivity {
 
     // get & post api
     private void getResponse(String text, String token){
-        chatModelArrayList.add(new ChatModel(text, USER_KEY, null, null));
+        chatModelArrayList.add(new ChatModel(text, USER_KEY, null, null, 0));
         chatRVAdapter.notifyDataSetChanged();
 
         // params : post에 필요한 변수
@@ -146,14 +148,13 @@ public class ChatActivity extends AppCompatActivity {
         SharedPreferences chatResponse = getSharedPreferences("chatResponse", MODE_PRIVATE);
         SharedPreferences.Editor editor= chatResponse.edit();
 
-        String url_test = "http://34.64.177.178/chatbot/getresponse/dummy1";
-        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url_test, params, new Response.Listener<JSONObject>(){
+        String url_test = "http://34.64.177.178/chatbot/getresponse/dummy1"; // dummy 데이터를 모아놓은 임시 url
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url_chatbot, params, new Response.Listener<JSONObject>(){
             @Override
             public void onResponse(JSONObject response) {
                 Log.v("chatbot response", response.toString());
                 try{
                     int message_type = response.getInt("message_type");
-
                     if(message_type == 0){
                         Boolean isSuccess = response.getBoolean("success");
                         int statusCode = response.getInt("statusCode");
@@ -165,7 +166,7 @@ public class ChatActivity extends AppCompatActivity {
                         editor.putString("message_content", message_content);
 
                         Log.v("chatbot message response isSuccess", isSuccess.toString());
-                        Log.v("chatbot message  response statusCode", Integer.toString(statusCode));
+                        Log.v("chatbot message response statusCode", Integer.toString(statusCode));
                         Log.v("chatbot message response message_type", Integer.toString(message_type));
                         Log.v("chatbot message response message_content", message_content);
 
@@ -178,16 +179,46 @@ public class ChatActivity extends AppCompatActivity {
                         JSONArray welfare_info = response.getJSONArray("welfare_info");
 
                         int jar_len = welfare_info.length();
-                        for(int i = 0; i < jar_len; i++){
-                            JSONObject obj = welfare_info.getJSONObject(i);
+                        if(jar_len >0){
+                            for(int i = 0; i < jar_len; i++){
 
-                            String titleName = "welfare_title" + Integer.toString(i+1);
-                            String summaryName = "welfare_summary" + Integer.toString(i+1);
+                                Log.v("ChatActivity for loop start",Integer.toString(i));
+                                Log.v("ChatActivity jar", welfare_info.toString());
+                                Log.v("ChatActivity jar JSONObject", welfare_info.getJSONObject(i).toString());
+                                Log.v("ChatActivity jar obj", welfare_info.get(i).toString());
 
-                            editor.putString(titleName, obj.getString("title"));
-                            editor.putString(summaryName, obj.getString("summary"));
-                            Log.v("chatbot message response titleName", obj.getString("title"));
-                            Log.v("chatbot message response summary", obj.getString("summary"));
+                                // using JSONObject
+                                JSONObject obj = welfare_info.getJSONObject(i);
+
+                                String titleName = "welfare_title" + Integer.toString(i+1);
+                                String summaryName = "welfare_summary" + Integer.toString(i+1);
+
+                                int welfare_id = obj.getInt("welfare_info");
+                                String title = obj.getString("title");
+                                String summary = obj.getString("summary");
+
+                                String key = "welfare_info_" + Integer.toString(i);
+                                ArrayList<String> list = new ArrayList<String>();
+                                list.add(Integer.toString(welfare_id));
+                                list.add(title);
+                                list.add(summary);
+
+                                JSONArray a = new JSONArray();
+                                for (int j = 0; j < list.size(); j++) {
+                                    a.put(list.get(j));
+                                }
+                                if (!list.isEmpty()) {
+                                    editor.putString(key, a.toString());
+                                    Log.v("ChatActivity json array", a.toString());
+                                } else {
+                                    editor.putString(key, null);
+                                }
+
+                                //editor.putString(titleName, obj.getString("title"));
+                                //editor.putString(summaryName, obj.getString("summary"));
+                                //Log.v("chatbot message response titleName", obj.getString("title"));
+                                //Log.v("chatbot message response summary", obj.getString("summary"));
+                            }
                         }
 
                         editor.putInt("num_info", jar_len);
@@ -230,29 +261,41 @@ public class ChatActivity extends AppCompatActivity {
 
             if(chatResponse.getInt("message_type",0)==0){
                 String chat_response = chatResponse.getString("message_content", "");
-                chatModelArrayList.add(new ChatModel(chat_response, BOT_KEY, null, null));
+                chatModelArrayList.add(new ChatModel(chat_response, BOT_KEY, null, null, 0));
                 chatRVAdapter.notifyDataSetChanged();
             }
             else if(chatResponse.getInt("message_type",0)==1){
-                int jar_len = chatResponse.getInt("num_info",0);
-                String[] welfareInfoTitle = new String[jar_len];
-                String[] welfareInfoSummary= new String[jar_len];
-                for(int i = 0; i < jar_len; i++){
-                    String titleName = "welfare_title" + Integer.toString(i+1);
-                    String summaryName = "welfare_summary" + Integer.toString(i+1);
-                    welfareInfoTitle[i] = chatResponse.getString(titleName, "");
-                    welfareInfoSummary[i] = chatResponse.getString(summaryName, "");
+
+                for(int i = 0; i < chatResponse.getInt("num_info",0); i++){
+                    String key = "welfare_info_" + Integer.toString(i);
+                    String json = chatResponse.getString(key, null);
+
+                    Log.v("ChatActivity JSON string type loaded", json.toString());
+                    ArrayList<String> decode_list  = new ArrayList<String>();
+                    if (json != null) {
+                        try {
+                            JSONArray a = new JSONArray(json);
+                            for (int j = 0; j < a.length(); j++) {
+                                String str = a.optString(j);
+                                Log.v("ChatActivity JSON string parsing", str);
+                                decode_list.add(str);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    int welfare_id = Integer.parseInt(decode_list.get(0));
+                    String title = decode_list.get(1);
+                    String summary = decode_list.get(2);
+
+                    chatModelArrayList.add(new ChatModel("", BOT_INFO_KEY, title, summary, welfare_id));
+                    chatRVAdapter.notifyDataSetChanged();
                 }
-
-                chatModelArrayList.add(new ChatModel("", BOT_INFO_KEY, welfareInfoTitle, welfareInfoSummary));
-                chatRVAdapter.notifyDataSetChanged();
-            }
-            else{
-
             }
         }
         else{
-            chatModelArrayList.add(new ChatModel("Server Error!", BOT_KEY, null, null));
+            chatModelArrayList.add(new ChatModel("Server Error!", BOT_KEY, null, null, 0));
             chatRVAdapter.notifyDataSetChanged();
         }
 

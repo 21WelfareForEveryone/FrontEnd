@@ -143,8 +143,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d("JSONException error", e.getMessage());
                 }
             }
-        },
-                new Response.ErrorListener(){
+        }, new Response.ErrorListener(){
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.v("login onResponse", "false");
