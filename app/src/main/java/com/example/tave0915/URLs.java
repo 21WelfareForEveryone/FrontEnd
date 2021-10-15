@@ -16,7 +16,7 @@ public class URLs {
     * url_welfare_read : 복지 정보 검색
     * */
 
-    private static final String root_url = "http://34.64.176.63:8080";
+    private static final String root_url = "http://34.64.176.63";
     public static final String url_register = root_url + "/rest/user/register";
     public static final String url_login = root_url + "/rest/user/login";
     public static final String url_update = root_url + "/rest/user/update";
