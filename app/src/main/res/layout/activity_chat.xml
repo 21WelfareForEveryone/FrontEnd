@@ -57,7 +57,9 @@
                         android:hint = "메세지를 입력하세요"
                         android:textSize="14sp"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"/>
+                        android:layout_height="50dp"
+                        android:minHeight="50dp"
+                        />
                     <Button
                         android:id="@+id/btn_transfer"
                         app:layout_constraintBottom_toBottomOf="parent"
